@@ -1,8 +1,7 @@
 package org.springframework.security.boot;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
+import com.dingtalk.spring.boot.DingTalkTemplate;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.biz.web.servlet.i18n.LocaleContextFilter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
@@ -32,65 +31,28 @@ import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 
-import com.dingtalk.spring.boot.DingTalkTemplate;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Configuration
 @AutoConfigureBefore({ SecurityFilterAutoConfiguration.class })
-@EnableConfigurationProperties({ SecurityBizProperties.class, SecurityDingTalkProperties.class, SecurityDingTalkMaAuthcProperties.class })
-public class SecurityDingTalkMaFilterConfiguration {
-		
+@EnableConfigurationProperties({ SecurityBizProperties.class, SecurityDingTalkProperties.class, SecurityDingTalkScanCodeAuthcProperties.class })
+public class SecurityDingTalkScanCodeFilterConfiguration {
+
 	@Bean
-	public DingTalkMaAuthenticationProvider dingTalkMaAuthenticationProvider(
+	public DingTalkScanCodeAuthenticationProvider dingTalkScanCodeAuthenticationProvider(
 			UserDetailsServiceAdapter userDetailsService, 
 			DingTalkTemplate dingtalkTemplate) {
-		return new DingTalkMaAuthenticationProvider(userDetailsService, dingtalkTemplate);
+		return new DingTalkScanCodeAuthenticationProvider(userDetailsService, dingtalkTemplate);
 	}
-	
-	@Order(SecurityProperties.DEFAULT_FILTER_ORDER + 5)
-	@Bean
-	public DingTalkTmpCodeAuthenticationProcessingFilter dingTalkTmpCodeAuthenticationProcessingFilter(
-				SecuritySessionMgtProperties sessionMgtProperties,
-				SecurityDingTalkTmpCodeAuthcProperties authcProperties) throws Exception {
-	    	
-		AuthenticationSuccessHandler authenticationSuccessHandler;
-		AuthenticationFailureHandler authenticationFailureHandler;
-		RememberMeServices rememberMeServices;
-		SessionAuthenticationStrategy sessionAuthenticationStrategy;
-		
-		DingTalkTmpCodeAuthenticationProcessingFilter authenticationFilter = new DingTalkTmpCodeAuthenticationProcessingFilter(objectMapper);
-			
-		/**
-		 * 批量设置参数
-		 */
-		PropertyMapper map = PropertyMapper.get().alwaysApplyingWhenNonNull();
-		
-		map.from(sessionMgtProperties.isAllowSessionCreation()).to(authenticationFilter::setAllowSessionCreation);
-		
-		map.from(authenticationManagerBean()).to(authenticationFilter::setAuthenticationManager);
-		map.from(authenticationSuccessHandler).to(authenticationFilter::setAuthenticationSuccessHandler);
-		map.from(authenticationFailureHandler).to(authenticationFilter::setAuthenticationFailureHandler);
-		
-		map.from(authcProperties.getTmpCodeParameter()).to(authenticationFilter::setTmpCodeParameter);
-		map.from(authcProperties.getPathPattern()).to(authenticationFilter::setFilterProcessesUrl);
-		map.from(authcProperties.isPostOnly()).to(authenticationFilter::setPostOnly);
-		map.from(rememberMeServices).to(authenticationFilter::setRememberMeServices);
-		map.from(sessionAuthenticationStrategy).to(authenticationFilter::setSessionAuthenticationStrategy);
-		map.from(authcProperties.isContinueChainBeforeSuccessfulAuthentication()).to(authenticationFilter::setContinueChainBeforeSuccessfulAuthentication);
-			
-	        return authenticationFilter;
-	    }
-	
-	
-	
 	
     @Configuration
     @ConditionalOnProperty(prefix = SecurityDingTalkProperties.PREFIX, value = "enabled", havingValue = "true")
-    @EnableConfigurationProperties({ SecurityBizProperties.class, SecuritySessionMgtProperties.class, SecurityDingTalkProperties.class, SecurityDingTalkMaAuthcProperties.class })
-    @Order(SecurityProperties.DEFAULT_FILTER_ORDER + 5)
-   	static class DingTalkMaWebSecurityConfigurerAdapter extends WebSecurityBizConfigurerAdapter {
+    @EnableConfigurationProperties({ SecurityBizProperties.class, SecurityDingTalkProperties.class, SecurityDingTalkScanCodeAuthcProperties.class })
+    @Order(SecurityProperties.DEFAULT_FILTER_ORDER + 6)
+   	static class DingTalkTmpCodeWebSecurityConfigurerAdapter extends WebSecurityBizConfigurerAdapter {
     	
-    	private final SecurityDingTalkMaAuthcProperties authcProperties;
+    	private final SecurityDingTalkScanCodeAuthcProperties authcProperties;
     	
     	private final LocaleContextFilter localeContextFilter;
 	    private final AuthenticationEntryPoint authenticationEntryPoint;
@@ -100,12 +62,12 @@ public class SecurityDingTalkMaFilterConfiguration {
     	private final RememberMeServices rememberMeServices;
 		private final SessionAuthenticationStrategy sessionAuthenticationStrategy;
    		
-   		public DingTalkMaWebSecurityConfigurerAdapter(
+   		public DingTalkTmpCodeWebSecurityConfigurerAdapter(
    			
    				SecurityBizProperties bizProperties,
    				SecuritySessionMgtProperties sessionMgtProperties,
-   				SecurityDingTalkMaAuthcProperties authcProperties,
-   				
+   				SecurityDingTalkScanCodeAuthcProperties authcProperties,
+
    				ObjectProvider<LocaleContextFilter> localeContextProvider,
    				ObjectProvider<AuthenticationProvider> authenticationProvider,
    				ObjectProvider<AuthenticationListener> authenticationListenerProvider,
@@ -121,8 +83,8 @@ public class SecurityDingTalkMaFilterConfiguration {
    			super(bizProperties, sessionMgtProperties, authenticationProvider.stream().collect(Collectors.toList()));
    			
    			this.authcProperties = authcProperties;
-
-			this.localeContextFilter = localeContextProvider.getIfAvailable();
+   			
+   			this.localeContextFilter = localeContextProvider.getIfAvailable();
    			List<AuthenticationListener> authenticationListeners = authenticationListenerProvider.stream().collect(Collectors.toList());
    			this.authenticationEntryPoint = WebSecurityUtils.authenticationEntryPoint(authcProperties, sessionMgtProperties, authenticationEntryPointProvider.stream().collect(Collectors.toList()));
    			this.authenticationSuccessHandler = WebSecurityUtils.authenticationSuccessHandler(authcProperties, sessionMgtProperties, authenticationListeners, authenticationSuccessHandlerProvider.stream().collect(Collectors.toList()));
@@ -133,9 +95,9 @@ public class SecurityDingTalkMaFilterConfiguration {
    			
    		}
    		
-   	    public DingTalkMaAuthenticationProcessingFilter authenticationProcessingFilter() throws Exception {
-
-			DingTalkMaAuthenticationProcessingFilter authenticationFilter = new DingTalkMaAuthenticationProcessingFilter(objectMapper);
+   	    public DingTalkScanCodeAuthenticationProcessingFilter authenticationProcessingFilter() throws Exception {
+   	    	
+   			DingTalkScanCodeAuthenticationProcessingFilter authenticationFilter = new DingTalkScanCodeAuthenticationProcessingFilter(objectMapper);
    			
 			/**
 			 * 批量设置参数
@@ -148,7 +110,7 @@ public class SecurityDingTalkMaFilterConfiguration {
 			map.from(authenticationSuccessHandler).to(authenticationFilter::setAuthenticationSuccessHandler);
 			map.from(authenticationFailureHandler).to(authenticationFilter::setAuthenticationFailureHandler);
 			
-			map.from(authcProperties.getCodeParameter()).to(authenticationFilter::setCodeParameter);
+			map.from(authcProperties.getTmpCodeParameter()).to(authenticationFilter::setCodeParameter);
 			map.from(authcProperties.getPathPattern()).to(authenticationFilter::setFilterProcessesUrl);
 			map.from(authcProperties.isPostOnly()).to(authenticationFilter::setPostOnly);
 			map.from(rememberMeServices).to(authenticationFilter::setRememberMeServices);
@@ -157,24 +119,24 @@ public class SecurityDingTalkMaFilterConfiguration {
    			
    	        return authenticationFilter;
    	    }
-   	    
 
    	    @Override
 		public void configure(HttpSecurity http) throws Exception {
-	    	
+   	    	
    	    	http.antMatcher(authcProperties.getPathPattern())
 				.exceptionHandling()
 	        	.authenticationEntryPoint(authenticationEntryPoint)
 	        	.and()
 	        	.httpBasic()
 	        	.disable()
-   	        	.addFilterBefore(localeContextFilter, UsernamePasswordAuthenticationFilter.class)
+	        	.addFilterBefore(localeContextFilter, UsernamePasswordAuthenticationFilter.class)
    	        	.addFilterBefore(authenticationProcessingFilter(), UsernamePasswordAuthenticationFilter.class); 
    	    	
    	    	super.configure(http, authcProperties.getCros());
    	    	super.configure(http, authcProperties.getCsrf());
    	    	super.configure(http, authcProperties.getHeaders());
 	    	super.configure(http);
+	    	
    	    }
    	    
    	    @Override
