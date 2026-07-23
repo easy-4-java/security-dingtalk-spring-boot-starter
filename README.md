@@ -14,7 +14,7 @@ security dingtalk starter for spring boot
 
 ``` xml
 <dependency>
-	<groupId>com.github.hiwepy</groupId>
+	<groupId>io.github.easy4j</groupId>
 	<artifactId>security-dingtalk-spring-boot-starter</artifactId>
 	<version>${project.version}</version>
 </dependency>
