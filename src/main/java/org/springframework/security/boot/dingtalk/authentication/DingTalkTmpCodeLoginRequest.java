@@ -6,8 +6,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
+<<<<<<< Updated upstream
  * 第三方系统钉钉扫码登录授权
  * @author 		： <a href="https://github.com/hiwepy">wandl</a>
+=======
+ * 企业内部应用免登、第三方企业应用免登、应用管理后台免登
+ * @author 		： <a href="https://github.com/easy-4-java">wandl</a>
+>>>>>>> Stashed changes
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DingTalkTmpCodeLoginRequest {

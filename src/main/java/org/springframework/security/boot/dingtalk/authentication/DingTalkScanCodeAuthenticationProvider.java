@@ -1,14 +1,15 @@
 package org.springframework.security.boot.dingtalk.authentication;
 
-import java.util.Objects;
-
+import com.dingtalk.api.response.OapiSnsGetuserinfoBycodeResponse;
+import com.dingtalk.api.response.OapiSnsGetuserinfoBycodeResponse.UserInfo;
+import com.dingtalk.spring.boot.DingTalkTemplate;
+import com.taobao.api.ApiException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.boot.biz.exception.AuthResponse;
 import org.springframework.security.boot.biz.userdetails.SecurityPrincipal;
 import org.springframework.security.boot.biz.userdetails.UserDetailsServiceAdapter;
 import org.springframework.security.boot.dingtalk.exception.DingTalkAuthenticationServiceException;
@@ -21,22 +22,19 @@ import org.springframework.security.core.userdetails.UserDetailsChecker;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-import com.alibaba.fastjson.JSONObject;
-import com.dingtalk.api.response.OapiUserGetResponse;
-import com.dingtalk.api.response.OapiUserGetuserinfoResponse;
-import com.dingtalk.spring.boot.DingTalkTemplate;
-import com.taobao.api.ApiException;
+/**
+ * https://open.dingtalk.com/document/orgapp-server/scan-qr-code-to-log-on-to-third-party-websites
+ */
+public class DingTalkScanCodeAuthenticationProvider implements AuthenticationProvider, InitializingBean {
 
-public class DingTalkMaAuthenticationProvider implements AuthenticationProvider, InitializingBean {
-	
 	protected MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
 	private UserDetailsChecker userDetailsChecker = new AccountStatusUserDetailsChecker();
 	private final Logger logger = LoggerFactory.getLogger(getClass());
     private final UserDetailsServiceAdapter userDetailsService;
     private final DingTalkTemplate dingTalkTemplate;
-    
-    public DingTalkMaAuthenticationProvider(final UserDetailsServiceAdapter userDetailsService,
-    		final DingTalkTemplate dingTalkTemplate) {
+
+    public DingTalkScanCodeAuthenticationProvider(final UserDetailsServiceAdapter userDetailsService,
+                                                  final DingTalkTemplate dingTalkTemplate) {
         this.userDetailsService = userDetailsService;
         this.dingTalkTemplate = dingTalkTemplate;
     }
@@ -49,13 +47,8 @@ public class DingTalkMaAuthenticationProvider implements AuthenticationProvider,
     /**
      * 
      * <p>完成匹配Token的认证，这里返回的对象最终会通过：SecurityContextHolder.getContext().setAuthentication(authResult); 放置在上下文中</p>
-<<<<<<< Updated upstream
-     * @author 		：<a href="https://github.com/hiwepy">wandl</a>
-     * @param authentication  {@link DingTalkTmpCodeAuthenticationToken IdentityCodeAuthenticationToken} 对象
-=======
      * @author 		：<a href="https://github.com/easy-4-java">wandl</a>
-     * @param authentication  {@link DingTalkMaAuthenticationToken IdentityCodeAuthenticationToken} 对象
->>>>>>> Stashed changes
+     * @param authentication  {@link DingTalkScanCodeAuthenticationToken IdentityCodeAuthenticationToken} 对象
      * @return 认证结果{@link Authentication}对象
      * @throws AuthenticationException  认证失败会抛出异常
      */
@@ -68,13 +61,13 @@ public class DingTalkMaAuthenticationProvider implements AuthenticationProvider,
 			logger.debug("Processing authentication request : " + authentication);
 		}
  
-    	DingTalkMaLoginRequest loginRequest = (DingTalkMaLoginRequest) authentication.getPrincipal();
+    	DingTalkScanCodeLoginRequest loginRequest = (DingTalkScanCodeLoginRequest) authentication.getPrincipal();
 
-    	if ( !StringUtils.hasText(loginRequest.getUserid()) && !StringUtils.hasText(loginRequest.getCode())) {
-			logger.debug("No Code found in request.");
-			throw new DingTalkCodeNotFoundException("No Code found in request.");
+		if ( !StringUtils.hasText(loginRequest.getLoginTmpCode())) {
+			logger.debug("No loginTmpCode found in request.");
+			throw new DingTalkCodeNotFoundException("No loginTmpCode found in request.");
 		}
-    	
+		
 		try {
 
 			if(!dingTalkTemplate.hasAppKey(loginRequest.getKey())) {
@@ -83,58 +76,46 @@ public class DingTalkMaAuthenticationProvider implements AuthenticationProvider,
 			}
 			
 			String appKey = loginRequest.getKey();
-			String appSecret = dingTalkTemplate.getAppSecret(loginRequest.getKey());
-			// 获取access_token
-			String accessToken = dingTalkTemplate.getAccessToken(appKey, appSecret);
+			String appSecret = dingTalkTemplate.getAppSecret(loginRequest.getCorpId(), loginRequest.getKey());
 			
-			if(StringUtils.hasText(loginRequest.getCode()) && !StringUtils.hasText(loginRequest.getUserid()) ) {
+			DingTalkScanCodeAuthenticationToken dingTalkToken = (DingTalkScanCodeAuthenticationToken) authentication;
+			
+			if (StringUtils.hasText(loginRequest.getLoginTmpCode())) {
 				
-				OapiUserGetuserinfoResponse response = dingTalkTemplate.getUserinfoBycode(loginRequest.getCode(), accessToken);
-				/*{
-				    "userid": "****",
-				    "sys_level": 1,
+				// 第三方应用钉钉扫码登录：通过临时授权码Code获取用户信息，临时授权码只能使用一次
+				OapiSnsGetuserinfoBycodeResponse response = dingTalkTemplate.opsForSns().getUserinfoByTmpCode(loginRequest.getLoginTmpCode(), appKey, appSecret);
+				/*{ 
+				    "errcode": 0,
 				    "errmsg": "ok",
-				    "is_sys": true,
-				    "errcode": 0
+				    "user_info": {
+				        "nick": "张三",
+				        "openid": "liSii8KCxxxxx",
+				        "unionid": "7Huu46kk"
+				    }
 				}*/
-				if (logger.isDebugEnabled()) {
-					logger.debug(response.getBody());
-				}
-				
 				if(!response.isSuccess()) {
-					logger.error(JSONObject.toJSONString(AuthResponse.of(response.getErrorCode(), response.getErrmsg())));
+					logger.error(response.getBody());
 					throw new DingTalkAuthenticationServiceException(response.getErrmsg());
 				}
+
+				UserInfo userInfo = response.getUserInfo();
 				
-				loginRequest.setUserid(response.getUserid());
-				
+				dingTalkToken.setUnionid(userInfo.getUnionid());
+				dingTalkToken.setOpenid(userInfo.getOpenid());
+				dingTalkToken.setUserInfo(userInfo);
+
 			}
-			
-			DingTalkTmpCodeAuthenticationToken dingTalkToken = (DingTalkTmpCodeAuthenticationToken) authentication;
-			
-			if(Objects.isNull(loginRequest.getUserInfo()) && !Objects.isNull(loginRequest.getUserid()) ) {
-				OapiUserGetResponse userInfoResponse = dingTalkTemplate.getUserByUserid(loginRequest.getUserid(), accessToken);
-				if(!userInfoResponse.isSuccess()) {
-					logger.error(JSONObject.toJSONString(AuthResponse.of(userInfoResponse.getErrorCode(), userInfoResponse.getErrmsg())));
-					throw new DingTalkAuthenticationServiceException(userInfoResponse.getErrmsg());
-				}
-				dingTalkToken.setUserInfo(userInfoResponse);
-				dingTalkToken.setUnionid(userInfoResponse.getUnionid());
-				dingTalkToken.setOpenid(userInfoResponse.getOpenId());
-				loginRequest.setUnionid(userInfoResponse.getUnionid());
-				loginRequest.setOpenid(userInfoResponse.getOpenId());
-			}
-			
+
 			UserDetails ud = getUserDetailsService().loadUserDetails(dingTalkToken);
 	        
 	        // User Status Check
 	        getUserDetailsChecker().check(ud);
 	        
-	        DingTalkTmpCodeAuthenticationToken authenticationToken = null;
+	        DingTalkScanCodeAuthenticationToken authenticationToken = null;
 	        if(SecurityPrincipal.class.isAssignableFrom(ud.getClass())) {
-	        	authenticationToken = new DingTalkTmpCodeAuthenticationToken(ud, ud.getPassword(), ud.getAuthorities());        	
+	        	authenticationToken = new DingTalkScanCodeAuthenticationToken(ud, ud.getPassword(), ud.getAuthorities());        	
 	        } else {
-	        	authenticationToken = new DingTalkTmpCodeAuthenticationToken(ud.getUsername(), ud.getPassword(), ud.getAuthorities());
+	        	authenticationToken = new DingTalkScanCodeAuthenticationToken(ud.getUsername(), ud.getPassword(), ud.getAuthorities());
 			}
 	        authenticationToken.setDetails(authentication.getDetails());
 	        
@@ -146,7 +127,7 @@ public class DingTalkMaAuthenticationProvider implements AuthenticationProvider,
     
     @Override
     public boolean supports(Class<?> authentication) {
-        return (DingTalkTmpCodeAuthenticationToken.class.isAssignableFrom(authentication));
+        return (DingTalkScanCodeAuthenticationToken.class.isAssignableFrom(authentication));
     }
 
 	public void setUserDetailsChecker(UserDetailsChecker userDetailsChecker) {

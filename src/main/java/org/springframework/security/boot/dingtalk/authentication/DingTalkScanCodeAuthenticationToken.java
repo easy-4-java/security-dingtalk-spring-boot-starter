@@ -14,25 +14,18 @@
  * the License.
  */
 package org.springframework.security.boot.dingtalk.authentication;
-import java.util.Collection;
 
+import com.dingtalk.api.response.OapiSnsGetuserinfoBycodeResponse;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
-import com.dingtalk.api.response.OapiUserGetResponse;
+import java.util.Collection;
 
 @SuppressWarnings("serial")
-public class DingTalkMaAuthenticationToken extends AbstractAuthenticationToken {
+public class DingTalkScanCodeAuthenticationToken extends AbstractAuthenticationToken {
 
-	/**
-	 * 员工在当前企业内的唯一标识，也称staffId。可由企业在创建时指定，并代表一定含义比如工号，创建后不可修改
-	 */
 	private Object principal;
 	private Object credentials;
-	/**
-	 * 用户ID
-	 */
-	protected String userid;
 	/**
 	 * 第三方平台UnionID（通常指第三方账号体系下用户的唯一ID）
 	 */
@@ -44,31 +37,23 @@ public class DingTalkMaAuthenticationToken extends AbstractAuthenticationToken {
 	/**
 	 * 用户信息
 	 */
-	protected OapiUserGetResponse userInfo;
-	/**
-	 * 绑定的账号
-	 */
-	protected String username;
-	/**
-	 * 绑定的账号密码
-	 */
-	protected String password;
+	protected OapiSnsGetuserinfoBycodeResponse.UserInfo userInfo ;
 
-	public DingTalkMaAuthenticationToken(Object principal) {
+	public DingTalkScanCodeAuthenticationToken(Object principal) {
 		super(null);
 		this.principal = principal;
 		setAuthenticated(false);
 	}
 
-	public DingTalkMaAuthenticationToken(Object principal, String credentials) {
+	public DingTalkScanCodeAuthenticationToken(Object principal, String credentials) {
 		super(null);
 		this.principal = principal;
 		this.credentials = credentials;
 		setAuthenticated(false);
 	}
 
-	public DingTalkMaAuthenticationToken(Object principal, Object credentials,
-			Collection<? extends GrantedAuthority> authorities) {
+	public DingTalkScanCodeAuthenticationToken(Object principal, Object credentials,
+                                               Collection<? extends GrantedAuthority> authorities) {
 		super(authorities);
 		this.principal = principal;
 		this.credentials = credentials;
@@ -78,10 +63,12 @@ public class DingTalkMaAuthenticationToken extends AbstractAuthenticationToken {
 	// ~ Methods
 	// ========================================================================================================
 
+	@Override
 	public Object getCredentials() {
 		return this.credentials;
 	}
 
+	@Override
 	public Object getPrincipal() {
 		return this.principal;
 	}
@@ -90,6 +77,7 @@ public class DingTalkMaAuthenticationToken extends AbstractAuthenticationToken {
 		this.principal = principal;
 	}
 
+	@Override
 	public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
 		if (isAuthenticated) {
 			throw new IllegalArgumentException(
@@ -103,14 +91,6 @@ public class DingTalkMaAuthenticationToken extends AbstractAuthenticationToken {
 	public void eraseCredentials() {
 		super.eraseCredentials();
 		credentials = null;
-	}
-
-	public String getUserid() {
-		return userid;
-	}
-
-	public void setUserid(String userid) {
-		this.userid = userid;
 	}
 
 	public String getUnionid() {
@@ -129,29 +109,12 @@ public class DingTalkMaAuthenticationToken extends AbstractAuthenticationToken {
 		this.openid = openid;
 	}
 
-	public OapiUserGetResponse getUserInfo() {
+	public OapiSnsGetuserinfoBycodeResponse.UserInfo getUserInfo() {
 		return userInfo;
 	}
 
-	public void setUserInfo(OapiUserGetResponse userInfo) {
+	public void setUserInfo(OapiSnsGetuserinfoBycodeResponse.UserInfo userInfo) {
 		this.userInfo = userInfo;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	
 }
