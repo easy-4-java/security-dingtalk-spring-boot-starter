@@ -426,6 +426,7 @@
         <maven-nexus-staging-plugin.version>1.6.8</maven-nexus-staging-plugin.version>
         <spring-security-biz.version>1.0.0-SNAPSHOT</spring-security-biz.version>
         <spring-boot-starter-dingtalk.version>1.0.0-SNAPSHOT</spring-boot-starter-dingtalk.version>
+                <dingtalk-sdk.version>2.2.55</dingtalk-sdk.version>
     </properties>
     
     <dependencyManagement>
@@ -481,7 +482,13 @@
                 <scope>provided</scope>
             </dependency>
             
-        </dependencies>
+                <dependency>
+            <groupId>com.dingtalk</groupId>
+            <artifactId>dingtalk-sdk</artifactId>
+            <version>${dingtalk-sdk.version}</version>
+            <scope>provided</scope>
+        </dependency>
+</dependencies>
     </dependencyManagement>
     
     <dependencies>
@@ -597,7 +604,7 @@
         <dependency>
             <groupId>com.dingtalk</groupId>
             <artifactId>dingtalk-sdk</artifactId>
-            <version>20190704</version>
+            <version>${dingtalk-sdk.version}</version>
             <scope>provided</scope>
         </dependency>
         
