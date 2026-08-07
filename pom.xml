@@ -12,7 +12,7 @@
     <groupId>io.github.easy4j</groupId>
     <artifactId>security-dingtalk-spring-boot-starter</artifactId>
     <description>Spring Boot Starter For Spring Security With DingTalk </description>
-    <version>4.1.x.20260527-SNAPSHOT</version>
+    <version>4.1.x.20260630-SNAPSHOT</version>
     <name>${project.groupId}:${project.artifactId}</name>
     <url>https://github.com/easy-4-java/${project.artifactId}</url>
     <packaging>jar</packaging>
@@ -408,7 +408,7 @@
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>17</java.version>
+        <java.version>21</java.version>
         <maven.compiler.release>${java.version}</maven.compiler.release>
         
         <maven.version>3.9.9</maven.version>
@@ -439,9 +439,9 @@
         <dingtalk-sdk.version>2.0.0</dingtalk-sdk.version>
         <guava.version>33.2.1-jre</guava.version>
         <json-smart.version>2.4.8</json-smart.version>
-        <jwt-issuer.version>1.1.4.1.RELEASE</jwt-issuer.version>
-        <spring-boot-starter-security-biz.version>3.3.x.20241003.RELEASE</spring-boot-starter-security-biz.version>
-        <spring-boot-starter-dingtalk.version>3.3.x.20241003.RELEASE</spring-boot-starter-dingtalk.version>
+        <jwt-issuer.version>3.0.x.20260630-SNAPSHOT</jwt-issuer.version>
+        <spring-boot-starter-security-biz.version>4.1.x.20260630-SNAPSHOT</spring-boot-starter-security-biz.version>
+        <spring-boot-starter-dingtalk.version>4.1.x.20260630-SNAPSHOT</spring-boot-starter-dingtalk.version>
                 <slf4j.version>2.0.18</slf4j.version>
     </properties>
 
