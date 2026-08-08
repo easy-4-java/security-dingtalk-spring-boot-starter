@@ -7,7 +7,7 @@ import lombok.Data;
 
 /**
  * 第三方系统钉钉扫码登录授权
- * @author 		： <a href="https://github.com/hiwepy">wandl</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
  */
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)

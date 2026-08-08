@@ -20,7 +20,7 @@ import org.springframework.security.boot.biz.exception.AuthenticationServiceExce
 
 /**
  * DingTalk 服务端认证异常
- * @author 		： <a href="https://github.com/hiwepy">wandl</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
  */
 @SuppressWarnings("serial")
 public class DingTalkAuthenticationServiceException extends AuthenticationServiceExceptionAdapter {
