@@ -1,9 +1,8 @@
 package org.springframework.security.boot.dingtalk.authentication;
 
+import com.dingtalk.spring.boot.DingTalkTemplate;
 import com.taobao.api.ApiException;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -17,8 +16,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsChecker;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
-
-import com.dingtalk.spring.boot.DingTalkTemplate;
 
 @Slf4j
 public class DingTalkMaAuthenticationProvider implements AuthenticationProvider, InitializingBean {
@@ -41,7 +38,7 @@ public class DingTalkMaAuthenticationProvider implements AuthenticationProvider,
     /**
      *
      * <p>完成匹配Token的认证，这里返回的对象最终会通过：SecurityContextHolder.getContext().setAuthentication(authResult); 放置在上下文中</p>
-     * @author 		：<a href="https://github.com/hiwepy">wandl</a>
+     * @author [@Loong Wan](https://github.com/loong10k)
      * @param authentication  {@link DingTalkMaAuthenticationToken IdentityCodeAuthenticationToken} 对象
      * @return 认证结果{@link Authentication}对象
      * @throws AuthenticationException  认证失败会抛出异常

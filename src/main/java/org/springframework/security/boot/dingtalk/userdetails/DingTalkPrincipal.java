@@ -15,15 +15,15 @@
  */
 package org.springframework.security.boot.dingtalk.userdetails;
 
-import java.util.Collection;
-
 import org.springframework.security.boot.biz.userdetails.SecurityPrincipal;
 import org.springframework.security.core.GrantedAuthority;
+
+import java.util.Collection;
 
 /**
  * TODO
  * 
- * @author ： <a href="https://github.com/hiwepy">wandl</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
  */
 @SuppressWarnings("serial")
 public class DingTalkPrincipal extends SecurityPrincipal {
