@@ -47,7 +47,7 @@ public class DingTalkScanCodeAuthenticationProvider implements AuthenticationPro
     /**
      * 
      * <p>完成匹配Token的认证，这里返回的对象最终会通过：SecurityContextHolder.getContext().setAuthentication(authResult); 放置在上下文中</p>
-     * @author 		：<a href="https://github.com/hiwepy">wandl</a>
+     * @author [@Loong Wan](https://github.com/loong10k)
      * @param authentication  {@link DingTalkScanCodeAuthenticationToken IdentityCodeAuthenticationToken} 对象
      * @return 认证结果{@link Authentication}对象
      * @throws AuthenticationException  认证失败会抛出异常

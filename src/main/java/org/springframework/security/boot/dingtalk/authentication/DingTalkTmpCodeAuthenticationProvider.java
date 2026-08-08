@@ -1,10 +1,10 @@
 package org.springframework.security.boot.dingtalk.authentication;
 
+import com.dingtalk.spring.boot.DingTalkTemplate;
 import com.taobao.api.ApiException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.boot.SecurityDingTalkProperties;
@@ -14,13 +14,10 @@ import org.springframework.security.boot.dingtalk.exception.DingTalkAuthenticati
 import org.springframework.security.boot.dingtalk.exception.DingTalkCodeNotFoundException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.SpringSecurityMessageSource;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsChecker;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
-
-import com.dingtalk.spring.boot.DingTalkTemplate;
 
 /**
  * https://open.dingtalk.com/document/orgapp-server/scan-qr-code-to-log-on-to-third-party-websites
@@ -49,7 +46,7 @@ public class DingTalkTmpCodeAuthenticationProvider implements AuthenticationProv
     /**
      * 
      * <p>完成匹配Token的认证，这里返回的对象最终会通过：SecurityContextHolder.getContext().setAuthentication(authResult); 放置在上下文中</p>
-     * @author 		：<a href="https://github.com/hiwepy">wandl</a>
+     * @author [@Loong Wan](https://github.com/loong10k)
      * @param authentication  {@link DingTalkTmpCodeAuthenticationToken IdentityCodeAuthenticationToken} 对象
      * @return 认证结果{@link Authentication}对象
      * @throws AuthenticationException  认证失败会抛出异常
