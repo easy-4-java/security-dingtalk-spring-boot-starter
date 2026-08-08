@@ -13,24 +13,26 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.springframework.security.boot.dingtalk.exception;
+package org.springframework.security.boot;
 
-import org.springframework.security.boot.biz.exception.AuthResponseCode;
-import org.springframework.security.boot.biz.exception.AuthenticationServiceExceptionAdapter;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * DingTalk 服务端认证异常
+ * Unit tests for {{ @link SecurityDingTalkScanCodeFilterConfiguration }}.
+ *
  * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
  */
-@SuppressWarnings("serial")
-public class DingTalkAuthenticationServiceException extends AuthenticationServiceExceptionAdapter {
+@DisplayName("SecurityDingTalkScanCodeFilterConfiguration Tests")
+class SecurityDingTalkScanCodeFilterConfigurationTest {
 
-	public DingTalkAuthenticationServiceException( String msg) {
-		super(AuthResponseCode.SC_AUTHZ_THIRD_PARTY_SERVICE, msg);
-	}
-	
-	public DingTalkAuthenticationServiceException( String msg, Throwable t) {
-		super(AuthResponseCode.SC_AUTHZ_THIRD_PARTY_SERVICE,msg, t);
-	}
-	
+    @Test
+    @DisplayName("Instance can be created via constructor")
+    void testInstantiation() {
+        SecurityDingTalkScanCodeFilterConfiguration instance = new SecurityDingTalkScanCodeFilterConfiguration();
+        assertThat(instance).isNotNull();
+    }
 }
