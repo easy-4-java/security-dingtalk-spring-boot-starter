@@ -58,6 +58,11 @@ public class DingTalkMaAuthenticationProcessingFilter extends PostOnlyAuthentica
 	}
 	
     @Override
+    /** Attempts to authenticate the incoming request.
+     * @param request the request
+     * @param response the response
+     * @return the result
+     */
     public Authentication doAttemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException, IOException, ServletException {
         
@@ -113,18 +118,34 @@ public class DingTalkMaAuthenticationProcessingFilter extends PostOnlyAuthentica
 
     }
 
+	/** Extracts the crop id parameter from the HTTP request.
+	 * @param request the request
+	 * @return the result
+	 */
 	protected String obtainCropId(HttpServletRequest request) {
 		return request.getParameter(cropIdParameter);
 	}
 
+    /** Extracts the key parameter from the HTTP request.
+     * @param request the request
+     * @return the result
+     */
     protected String obtainKey(HttpServletRequest request) {
         return request.getParameter(keyParameter);
     }
 
+	/** Extracts the token parameter from the HTTP request.
+	 * @param request the request
+	 * @return the result
+	 */
 	protected String obtainToken(HttpServletRequest request) {
 		return request.getParameter(tokenParameter);
 	}
 
+    /** Extracts the auth code parameter from the HTTP request.
+     * @param request the request
+     * @return the result
+     */
     protected String obtainAuthCode(HttpServletRequest request) {
         return request.getParameter(authCodeParameter);
     }
@@ -143,38 +164,66 @@ public class DingTalkMaAuthenticationProcessingFilter extends PostOnlyAuthentica
 		authRequest.setDetails(authenticationDetailsSource.buildDetails(request));
 	}
 	
+	/** Creates an authentication token from the login request.
+	 * @param loginRequest the loginRequest
+	 * @return the result
+	 */
 	protected AbstractAuthenticationToken authenticationToken(DingTalkMaLoginRequest loginRequest) {
 		return new DingTalkMaAuthenticationToken(loginRequest);
 	}
 
+	/** Returns the crop id parameter.
+	 * @return the result
+	 */
 	public String getCropIdParameter() {
 		return cropIdParameter;
 	}
 
+	/** Sets the crop id parameter.
+	 * @param cropIdParameter the cropIdParameter
+	 */
 	public void setCropIdParameter(String cropIdParameter) {
 		this.cropIdParameter = cropIdParameter;
 	}
 
+	/** Returns the key parameter.
+	 * @return the result
+	 */
 	public String getKeyParameter() {
 		return keyParameter;
 	}
 
+	/** Sets the key parameter.
+	 * @param keyParameter the keyParameter
+	 */
 	public void setKeyParameter(String keyParameter) {
 		this.keyParameter = keyParameter;
 	}
 
+	/** Sets the token parameter.
+	 * @param tokenParameter the tokenParameter
+	 */
 	public void setTokenParameter(String tokenParameter) {
 		this.tokenParameter = tokenParameter;
 	}
 
+	/** Returns the token parameter.
+	 * @return the result
+	 */
 	public String getTokenParameter() {
 		return tokenParameter;
 	}
 
+	/** Returns the auth code parameter.
+	 * @return the result
+	 */
 	public String getAuthCodeParameter() {
 		return authCodeParameter;
 	}
 
+	/** Sets the auth code parameter.
+	 * @param authCodeParameter the authCodeParameter
+	 */
 	public void setAuthCodeParameter(String authCodeParameter) {
 		this.authCodeParameter = authCodeParameter;
 	}

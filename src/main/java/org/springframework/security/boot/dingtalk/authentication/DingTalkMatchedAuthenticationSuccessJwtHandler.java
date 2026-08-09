@@ -34,6 +34,11 @@ import org.springframework.security.core.Authentication;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+/** Matched authentication success handler for Ding Talk authentication that produces JWT tokens.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 
 public class DingTalkMatchedAuthenticationSuccessJwtHandler implements MatchedAuthenticationSuccessHandler {
 
@@ -46,12 +51,21 @@ public class DingTalkMatchedAuthenticationSuccessJwtHandler implements MatchedAu
 	}
 
 	@Override
+	/** Indicates whether this provider supports the given authentication class.
+	 * @param authentication the authentication
+	 * @return the result
+	 */
 	public boolean supports(Authentication authentication) {
 		return SubjectUtils.isAssignableFrom(authentication.getClass(), DingTalkMaAuthenticationToken.class
 				, DingTalkScanCodeAuthenticationToken.class, DingTalkTmpCodeAuthenticationToken.class);
 	}
 
 	@Override
+	/** Called when an authentication attempt succeeds.
+	 * @param request the request
+	 * @param response the response
+	 * @param authentication the authentication
+	 */
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 
@@ -67,18 +81,30 @@ public class DingTalkMatchedAuthenticationSuccessJwtHandler implements MatchedAu
 
 	}
 
+	/** Returns the payload repository.
+	 * @return the result
+	 */
 	public JwtPayloadRepository getPayloadRepository() {
 		return payloadRepository;
 	}
 
+	/** Sets the payload repository.
+	 * @param payloadRepository the payloadRepository
+	 */
 	public void setPayloadRepository(JwtPayloadRepository payloadRepository) {
 		this.payloadRepository = payloadRepository;
 	}
 
+	/** Returns whether the check expiry is enabled.
+	 * @return the result
+	 */
 	public boolean isCheckExpiry() {
 		return checkExpiry;
 	}
 
+	/** Sets the check expiry.
+	 * @param checkExpiry the checkExpiry
+	 */
 	public void setCheckExpiry(boolean checkExpiry) {
 		this.checkExpiry = checkExpiry;
 	}

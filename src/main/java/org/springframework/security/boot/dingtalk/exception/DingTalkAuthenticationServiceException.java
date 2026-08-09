@@ -19,7 +19,7 @@ import org.springframework.security.boot.biz.exception.AuthResponseCode;
 import org.springframework.security.boot.biz.exception.AuthenticationServiceExceptionAdapter;
 
 /**
- * DingTalk 服务端认证异常
+ * Exception thrown when a DingTalk server-side authentication error occurs
  * @author [@Loong Wan](https://github.com/loong10k)
  */
 @SuppressWarnings("serial")

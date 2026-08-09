@@ -4,25 +4,30 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+/** Login request DTO for Ding Talk Ma authentication.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DingTalkMaLoginRequest {
 
 	/**
-	 * 	企业的corpid
+	 * 	enterprise corpid
 	 */
 	protected String corpId;
 	/**
-	 * 应用的唯一标识key
+	 * application uniqueidentifierkey
 	 */
 	protected String key;
 	/**
-	 * 临时登录凭证code
+	 * temporarylogincredentialcode
 	 */
 	protected String authCode;
 	/**
-	 * 	当前请求使用的token，用于绑定用户
+	 * 	request token，used forbindinguser
 	 */
 	protected String token;
 	/**

@@ -23,6 +23,11 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.security.boot.biz.property.SecurityAuthcProperties;
 import org.springframework.security.boot.biz.property.SecurityLogoutProperties;
 import org.springframework.security.boot.dingtalk.authentication.DingTalkMaAuthenticationProcessingFilter;
+/** Configuration properties for Ding Talk Ma Authc.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 
 @ConfigurationProperties(SecurityDingTalkMaAuthcProperties.PREFIX)
 @Getter

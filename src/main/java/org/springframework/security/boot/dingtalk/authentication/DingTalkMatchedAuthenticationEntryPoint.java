@@ -29,18 +29,32 @@ import org.springframework.security.boot.utils.SubjectUtils;
 import org.springframework.security.core.AuthenticationException;
 
 import java.io.IOException;
+/** Matched authentication entry point for Ding Talk authentication failures.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 
 public class DingTalkMatchedAuthenticationEntryPoint implements MatchedAuthenticationEntryPoint {
 	
 	protected MessageSourceAccessor messages = SpringSecurityBizMessageSource.getAccessor();
 	
 	@Override
+	/** Indicates whether this provider supports the given authentication class.
+	 * @param e the e
+	 * @return the result
+	 */
 	public boolean supports(AuthenticationException e) {
 		return SubjectUtils.isAssignableFrom(e.getClass(), DingTalkAuthenticationServiceException.class,
 				DingTalkCodeIncorrectException.class, DingTalkCodeExpiredException.class);
 	}
 	
 	@Override
+	/** Commences an authentication scheme.
+	 * @param request the request
+	 * @param response the response
+	 * @param e the e
+	 */
 	public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException e)
 			throws IOException, ServletException {
 		SecurityResponseUtils.handleException(request, response, e);

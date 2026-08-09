@@ -19,12 +19,17 @@ import org.springframework.security.boot.biz.authentication.AbstractAuthenticati
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
+/** Authentication token for Ding Talk Ma authentication.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 
 @SuppressWarnings("serial")
 public class DingTalkMaAuthenticationToken extends AbstractAuthenticationToken {
 
 	/**
-	 * 员工在当前企业内的唯一标识，也称staffId。可由企业在创建时指定，并代表一定含义比如工号，创建后不可修改
+	 * employeeinenterprise uniqueidentifier，staffId。enterprisein，，
 	 */
 	private Object principal;
 	private Object credentials;
@@ -54,20 +59,32 @@ public class DingTalkMaAuthenticationToken extends AbstractAuthenticationToken {
 	// ========================================================================================================
 
 	@Override
+	/** Returns the credentials.
+	 * @return the result
+	 */
 	public Object getCredentials() {
 		return this.credentials;
 	}
 
 	@Override
+	/** Returns the principal.
+	 * @return the result
+	 */
 	public Object getPrincipal() {
 		return this.principal;
 	}
 	
+	/** Sets the principal.
+	 * @param principal the principal
+	 */
 	public void setPrincipal(Object principal) {
 		this.principal = principal;
 	}
 
 	@Override
+	/** Sets the authenticated.
+	 * @param isAuthenticated the isAuthenticated
+	 */
 	public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
 		if (isAuthenticated) {
 			throw new IllegalArgumentException(
@@ -77,6 +94,8 @@ public class DingTalkMaAuthenticationToken extends AbstractAuthenticationToken {
 	}
 
 	@Override
+	/** Erases the sensitive credentials from this token.
+	 */
 	public void eraseCredentials() {
 		super.eraseCredentials();
 		credentials = null;

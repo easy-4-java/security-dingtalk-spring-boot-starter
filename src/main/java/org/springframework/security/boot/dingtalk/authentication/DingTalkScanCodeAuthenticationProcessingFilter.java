@@ -36,7 +36,7 @@ import org.springframework.util.StringUtils;
 import java.io.IOException;
 
 /**
- * 扫码登录第三方网站: https://open.dingtalk.com/document/orgapp-server/scan-qr-code-to-log-on-to-third-party-websites
+ * Scan QR code to log on to third-party websites: https://open.dingtalk.com/document/orgapp-server/scan-qr-code-to-log-on-to-third-party-websites
  * @author [@Loong Wan](https://github.com/loong10k)
  */
 @Slf4j
@@ -66,6 +66,11 @@ public class DingTalkScanCodeAuthenticationProcessingFilter extends AbstractAuth
 	}
 
     @Override
+    /** Attempts to authenticate the incoming request.
+     * @param request the request
+     * @param response the response
+     * @return the result
+     */
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException, IOException, ServletException {
 
@@ -130,18 +135,34 @@ public class DingTalkScanCodeAuthenticationProcessingFilter extends AbstractAuth
 
     }
 
+	/** Extracts the crop id parameter from the HTTP request.
+	 * @param request the request
+	 * @return the result
+	 */
 	protected String obtainCropId(HttpServletRequest request) {
 		return request.getParameter(cropIdParameter);
 	}
 
+    /** Extracts the key parameter from the HTTP request.
+     * @param request the request
+     * @return the result
+     */
     protected String obtainKey(HttpServletRequest request) {
         return request.getParameter(keyParameter);
     }
 
+	/** Extracts the token parameter from the HTTP request.
+	 * @param request the request
+	 * @return the result
+	 */
 	protected String obtainToken(HttpServletRequest request) {
 		return request.getParameter(tokenParameter);
 	}
 
+    /** Extracts the tmp code parameter from the HTTP request.
+     * @param request the request
+     * @return the result
+     */
     protected String obtainTmpCode(HttpServletRequest request) {
         return request.getParameter(codeParameter);
     }
@@ -160,45 +181,79 @@ public class DingTalkScanCodeAuthenticationProcessingFilter extends AbstractAuth
 		authRequest.setDetails(authenticationDetailsSource.buildDetails(request));
 	}
 
+	/** Creates an authentication token from the login request.
+	 * @param loginRequest the loginRequest
+	 * @return the result
+	 */
 	protected AbstractAuthenticationToken authenticationToken(DingTalkScanCodeLoginRequest loginRequest) {
 		return new DingTalkScanCodeAuthenticationToken(loginRequest);
 	}
 
+	/** Returns the crop id parameter.
+	 * @return the result
+	 */
 	public String getCropIdParameter() {
 		return cropIdParameter;
 	}
 
+	/** Sets the crop id parameter.
+	 * @param cropIdParameter the cropIdParameter
+	 */
 	public void setCropIdParameter(String cropIdParameter) {
 		this.cropIdParameter = cropIdParameter;
 	}
 
+	/** Returns the key parameter.
+	 * @return the result
+	 */
 	public String getKeyParameter() {
 		return keyParameter;
 	}
 
+	/** Sets the key parameter.
+	 * @param keyParameter the keyParameter
+	 */
 	public void setKeyParameter(String keyParameter) {
 		this.keyParameter = keyParameter;
 	}
 
+	/** Sets the token parameter.
+	 * @param tokenParameter the tokenParameter
+	 */
 	public void setTokenParameter(String tokenParameter) {
 		this.tokenParameter = tokenParameter;
 	}
 
+	/** Returns the token parameter.
+	 * @return the result
+	 */
 	public String getTokenParameter() {
 		return tokenParameter;
 	}
 
+	/** Returns the code parameter.
+	 * @return the result
+	 */
 	public String getCodeParameter() {
 		return codeParameter;
 	}
 
+	/** Sets the code parameter.
+	 * @param codeParameter the codeParameter
+	 */
 	public void setCodeParameter(String codeParameter) {
 		this.codeParameter = codeParameter;
 	}
+	/** Returns whether the post only is enabled.
+	 * @return the result
+	 */
 	public boolean isPostOnly() {
 		return postOnly;
 	}
 
+	/** Sets the post only.
+	 * @param postOnly the postOnly
+	 */
 	public void setPostOnly(boolean postOnly) {
 		this.postOnly = postOnly;
 	}

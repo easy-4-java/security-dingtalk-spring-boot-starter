@@ -38,6 +38,11 @@ import org.springframework.security.web.authentication.session.SessionAuthentica
 
 import java.util.List;
 import java.util.stream.Collectors;
+/** Configuration for Ding Talk Scan Code authentication filter chain.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 
 @Configuration
 @AutoConfigureBefore({ SecurityFilterAutoConfiguration.class })
@@ -45,10 +50,20 @@ import java.util.stream.Collectors;
 public class SecurityDingTalkScanCodeFilterConfiguration {
 
 	@Bean
+	/** Creates a ding talk scan code authentication provider bean.
+	 * @param userDetailsServiceProvider the userDetailsServiceProvider
+	 * @param dingtalkTemplateProvider the dingtalkTemplateProvider
+	 * @return the result
+	 */
 	public DingTalkScanCodeAuthenticationProvider dingTalkScanCodeAuthenticationProvider(ObjectProvider<UserDetailsServiceAdapter> userDetailsServiceProvider,
 																						 ObjectProvider<DingTalkTemplate> dingtalkTemplateProvider) {
 		return new DingTalkScanCodeAuthenticationProvider(userDetailsServiceProvider.getIfAvailable(), dingtalkTemplateProvider.getIfAvailable());
 	}
+   	/** Adapter implementation for Ding Talk Scan Code Web Security Customizer.
+   	 *
+   	 * @author [@Loong Wan](https://github.com/loong10k)
+   	 * @since 1.0.0
+   	 */
 	
     @Configuration
     @ConditionalOnProperty(prefix = SecurityDingTalkProperties.PREFIX, value = "enabled", havingValue = "true")
@@ -101,12 +116,15 @@ public class SecurityDingTalkScanCodeFilterConfiguration {
    			
    		}
    		
+   	    /** Creates and configures the authentication processing filter.
+   	     * @return the result
+   	     */
    	    public DingTalkScanCodeAuthenticationProcessingFilter authenticationProcessingFilter() throws Exception {
    	    	
    			DingTalkScanCodeAuthenticationProcessingFilter authenticationFilter = new DingTalkScanCodeAuthenticationProcessingFilter(objectMapper);
    			
 			/**
-			 * 批量设置参数
+			 * 
 			 */
 			PropertyMapper map = PropertyMapper.get().alwaysApplyingWhenNonNull();
 			
@@ -129,6 +147,10 @@ public class SecurityDingTalkScanCodeFilterConfiguration {
 
 		@Bean
 		@Order(SecurityProperties.DEFAULT_FILTER_ORDER + 12)
+		/** Configures the ding talk ma security filter chain.
+		 * @param http the http
+		 * @return the result
+		 */
 		public SecurityFilterChain dingTalkMaSecurityFilterChain(HttpSecurity http) throws Exception {
 
 			http.securityMatcher(authcProperties.getPathPattern())
@@ -150,6 +172,9 @@ public class SecurityDingTalkScanCodeFilterConfiguration {
 		}
 
 		@Override
+		/** Customizes the web security configuration.
+		 * @param web the web
+		 */
 		public void customize(WebSecurity web) {
 			super.customize(web);
 		}

@@ -29,95 +29,95 @@ import java.util.Collection;
 public class DingTalkPrincipal extends SecurityPrincipal {
 
 	/**
-	 * 员工在当前企业内的唯一标识，也称staffId。可由企业在创建时指定，并代表一定含义比如工号，创建后不可修改
+	 * employeeinenterprise uniqueidentifier，staffId。enterprisein，，
 	 */
 	protected String userid;
 	/**
-	 * 员工在当前开发者企业账号范围内的唯一标识，系统生成，固定值，不会改变
+	 * employeeinenterprise uniqueidentifier，，，
 	 */
 	protected String unionid;
 	/**
-	 * 员工名字
+	 * employee
 	 */
 	protected String name;
 	/**
-	 * 分机号（仅限企业内部开发调用）
+	 * （enterpriseinternal）
 	 */
 	protected String tel;
 	/**
-	 * 办公地点
+	 * 
 	 */
 	protected String workPlace;
 	/**
-	 * 备注
+	 * 
 	 */
 	protected String remark;
 	/**
-	 * 手机号码
+	 * 
 	 */
 	protected String mobile;
 	/**
-	 * 员工的电子邮箱
+	 * employee
 	 */
 	protected String email;
 	/**
-	 * 员工的企业邮箱，如果员工已经开通了企业邮箱，接口会返回，否则不会返回
+	 * employee enterprise，employeeenterprise，，
 	 */
 	protected String orgEmail;
 	/**
-	 * 是否已经激活，true表示已激活，false表示未激活
+	 * ，true，false
 	 */
 	protected String active;
 	/**
-	 * 在对应的部门中的排序，Map结构的json字符串，key是部门的Id，value是人员在这个部门的排序值
+	 * in ，Map json，key Id，valuein
 	 */
 	protected String orderInDepts;
 	/**
-	 * 是否为企业的管理员，true表示是，false表示不是
+	 * enterprise management，true，false
 	 */
 	protected boolean admin;
 	/**
-	 * 是否为企业的老板，true表示是，false表示不是
+	 * enterprise ，true，false
 	 */
 	protected boolean boss;
 	/**
-	 * 在对应的部门中是否为主管：Map结构的json字符串，key是部门的Id，value是人员在这个部门中是否为主管，true表示是，false表示不是
+	 * in ：Map json，key Id，valuein，true，false
 	 */
 	protected boolean leaderInDepts;
 	/**
-	 * 是否号码隐藏，true表示隐藏，false表示不隐藏
+	 * ，true，false
 	 */
 	protected boolean hide;
 	/**
-	 * 成员所属部门id列表
+	 * id
 	 */
 	protected String department;
 	/**
-	 * 职位信息
+	 * information
 	 */
 	protected String position;
 	/**
-	 * 头像url
+	 * url
 	 */
 	protected String avatar;
 	/**
-	 * 入职时间。Unix时间戳 （在OA后台通讯录中的员工基础信息中维护过入职时间才会返回)
+	 * 。Unix （inOAbackend employeeinformation)
 	 */
 	protected String hiredDate;
 	/**
-	 * 员工工号
+	 * employee
 	 */
 	protected String jobnumber;
 	/**
-	 * 扩展属性，可以设置多种属性（但手机上最多只能显示10个扩展属性，具体显示哪些属性，请到OA管理后台-&gt;设置-&gt;通讯录信息设置和OA管理后台-&gt;设置-&gt;手机端显示信息设置）
+	 * properties，properties（10properties，properties，OAmanagementbackend-&gt;-&gt;informationandOAmanagementbackend-&gt;-&gt;information）
 	 */
 	protected String extattr;
 	/**
-	 * 是否是高管
+	 * 
 	 */
 	protected boolean senior;
 	/**
-	 * 国家地区码
+	 * 
 	 */
 	protected String stateCode;
 
@@ -135,186 +135,324 @@ public class DingTalkPrincipal extends SecurityPrincipal {
 		super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
 	}
 
+	/** Returns the userid.
+	 * @return the result
+	 */
 	public String getUserid() {
 		return userid;
 	}
 
+	/** Returns the unionid.
+	 * @return the result
+	 */
 	public String getUnionid() {
 		return unionid;
 	}
 
+	/** Returns the name.
+	 * @return the result
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/** Returns the tel.
+	 * @return the result
+	 */
 	public String getTel() {
 		return tel;
 	}
 
+	/** Returns the work place.
+	 * @return the result
+	 */
 	public String getWorkPlace() {
 		return workPlace;
 	}
 
+	/** Returns the remark.
+	 * @return the result
+	 */
 	public String getRemark() {
 		return remark;
 	}
 
+	/** Returns the mobile.
+	 * @return the result
+	 */
 	public String getMobile() {
 		return mobile;
 	}
 
+	/** Returns the email.
+	 * @return the result
+	 */
 	public String getEmail() {
 		return email;
 	}
 
+	/** Returns the org email.
+	 * @return the result
+	 */
 	public String getOrgEmail() {
 		return orgEmail;
 	}
 
+	/** Returns the active.
+	 * @return the result
+	 */
 	public String getActive() {
 		return active;
 	}
 
+	/** Returns the order in depts.
+	 * @return the result
+	 */
 	public String getOrderInDepts() {
 		return orderInDepts;
 	}
 
+	/** Returns whether the admin is enabled.
+	 * @return the result
+	 */
 	public boolean isAdmin() {
 		return admin;
 	}
 
+	/** Returns whether the boss is enabled.
+	 * @return the result
+	 */
 	public boolean isBoss() {
 		return boss;
 	}
 
+	/** Returns whether the leader in depts is enabled.
+	 * @return the result
+	 */
 	public boolean isLeaderInDepts() {
 		return leaderInDepts;
 	}
 
+	/** Returns whether the hide is enabled.
+	 * @return the result
+	 */
 	public boolean isHide() {
 		return hide;
 	}
 
+	/** Returns the department.
+	 * @return the result
+	 */
 	public String getDepartment() {
 		return department;
 	}
 
+	/** Returns the position.
+	 * @return the result
+	 */
 	public String getPosition() {
 		return position;
 	}
 
+	/** Returns the avatar.
+	 * @return the result
+	 */
 	public String getAvatar() {
 		return avatar;
 	}
 
+	/** Returns the hired date.
+	 * @return the result
+	 */
 	public String getHiredDate() {
 		return hiredDate;
 	}
 
+	/** Returns the jobnumber.
+	 * @return the result
+	 */
 	public String getJobnumber() {
 		return jobnumber;
 	}
 
+	/** Returns the extattr.
+	 * @return the result
+	 */
 	public String getExtattr() {
 		return extattr;
 	}
 
+	/** Returns whether the senior is enabled.
+	 * @return the result
+	 */
 	public boolean isSenior() {
 		return senior;
 	}
 
+	/** Returns the state code.
+	 * @return the result
+	 */
 	public String getStateCode() {
 		return stateCode;
 	}
 
+	/** Sets the userid.
+	 * @param userid the userid
+	 */
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
 
+	/** Sets the unionid.
+	 * @param unionid the unionid
+	 */
 	public void setUnionid(String unionid) {
 		this.unionid = unionid;
 	}
 
+	/** Sets the name.
+	 * @param name the name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/** Sets the tel.
+	 * @param tel the tel
+	 */
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
 
+	/** Sets the work place.
+	 * @param workPlace the workPlace
+	 */
 	public void setWorkPlace(String workPlace) {
 		this.workPlace = workPlace;
 	}
 
+	/** Sets the remark.
+	 * @param remark the remark
+	 */
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
 
+	/** Sets the mobile.
+	 * @param mobile the mobile
+	 */
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
 
+	/** Sets the email.
+	 * @param email the email
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	/** Sets the org email.
+	 * @param orgEmail the orgEmail
+	 */
 	public void setOrgEmail(String orgEmail) {
 		this.orgEmail = orgEmail;
 	}
 
+	/** Sets the active.
+	 * @param active the active
+	 */
 	public void setActive(String active) {
 		this.active = active;
 	}
 
+	/** Sets the order in depts.
+	 * @param orderInDepts the orderInDepts
+	 */
 	public void setOrderInDepts(String orderInDepts) {
 		this.orderInDepts = orderInDepts;
 	}
 
+	/** Sets the admin.
+	 * @param admin the admin
+	 */
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
 	}
 
+	/** Sets the boss.
+	 * @param boss the boss
+	 */
 	public void setBoss(boolean boss) {
 		this.boss = boss;
 	}
 
+	/** Sets the leader in depts.
+	 * @param leaderInDepts the leaderInDepts
+	 */
 	public void setLeaderInDepts(boolean leaderInDepts) {
 		this.leaderInDepts = leaderInDepts;
 	}
 
+	/** Sets the hide.
+	 * @param hide the hide
+	 */
 	public void setHide(boolean hide) {
 		this.hide = hide;
 	}
 
+	/** Sets the department.
+	 * @param department the department
+	 */
 	public void setDepartment(String department) {
 		this.department = department;
 	}
 
+	/** Sets the position.
+	 * @param position the position
+	 */
 	public void setPosition(String position) {
 		this.position = position;
 	}
 
+	/** Sets the avatar.
+	 * @param avatar the avatar
+	 */
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
 	}
 
+	/** Sets the hired date.
+	 * @param hiredDate the hiredDate
+	 */
 	public void setHiredDate(String hiredDate) {
 		this.hiredDate = hiredDate;
 	}
 
+	/** Sets the jobnumber.
+	 * @param jobnumber the jobnumber
+	 */
 	public void setJobnumber(String jobnumber) {
 		this.jobnumber = jobnumber;
 	}
 
+	/** Sets the extattr.
+	 * @param extattr the extattr
+	 */
 	public void setExtattr(String extattr) {
 		this.extattr = extattr;
 	}
 
+	/** Sets the senior.
+	 * @param senior the senior
+	 */
 	public void setSenior(boolean senior) {
 		this.senior = senior;
 	}
 
+	/** Sets the state code.
+	 * @param stateCode the stateCode
+	 */
 	public void setStateCode(String stateCode) {
 		this.stateCode = stateCode;
 	}

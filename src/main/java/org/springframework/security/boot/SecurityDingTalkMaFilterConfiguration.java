@@ -38,6 +38,11 @@ import org.springframework.security.web.authentication.session.SessionAuthentica
 
 import java.util.List;
 import java.util.stream.Collectors;
+/** Configuration for Ding Talk Ma authentication filter chain.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 
 @Configuration
 @AutoConfigureBefore({ SecurityFilterAutoConfiguration.class })
@@ -45,10 +50,20 @@ import java.util.stream.Collectors;
 public class SecurityDingTalkMaFilterConfiguration {
 		
 	@Bean
+	/** Creates a ding talk ma authentication provider bean.
+	 * @param userDetailsServiceProvider the userDetailsServiceProvider
+	 * @param dingtalkTemplateProvider the dingtalkTemplateProvider
+	 * @return the result
+	 */
 	public DingTalkMaAuthenticationProvider dingTalkMaAuthenticationProvider(ObjectProvider<UserDetailsServiceAdapter> userDetailsServiceProvider,
 																			 ObjectProvider<DingTalkTemplate> dingtalkTemplateProvider) {
 		return new DingTalkMaAuthenticationProvider(userDetailsServiceProvider.getIfAvailable(), dingtalkTemplateProvider.getIfAvailable());
 	}
+   	/** Adapter implementation for Ding Talk Ma Web Security Customizer.
+   	 *
+   	 * @author [@Loong Wan](https://github.com/loong10k)
+   	 * @since 1.0.0
+   	 */
 	
     @Configuration
     @ConditionalOnProperty(prefix = SecurityDingTalkProperties.PREFIX, value = "enabled", havingValue = "true")
@@ -100,12 +115,15 @@ public class SecurityDingTalkMaFilterConfiguration {
    			
    		}
    		
+   	    /** Creates and configures the authentication processing filter.
+   	     * @return the result
+   	     */
    	    public DingTalkMaAuthenticationProcessingFilter authenticationProcessingFilter() throws Exception {
 
 			DingTalkMaAuthenticationProcessingFilter authenticationFilter = new DingTalkMaAuthenticationProcessingFilter(objectMapper);
    			
 			/**
-			 * 批量设置参数
+			 * 
 			 */
 			PropertyMapper map = PropertyMapper.get().alwaysApplyingWhenNonNull();
 			
@@ -128,6 +146,10 @@ public class SecurityDingTalkMaFilterConfiguration {
 
 		@Bean
 		@Order(SecurityProperties.DEFAULT_FILTER_ORDER + 11)
+		/** Configures the ding talk ma security filter chain.
+		 * @param http the http
+		 * @return the result
+		 */
 		public SecurityFilterChain dingTalkMaSecurityFilterChain(HttpSecurity http) throws Exception {
 
    	    	http.securityMatcher(authcProperties.getPathPattern())
@@ -149,6 +171,9 @@ public class SecurityDingTalkMaFilterConfiguration {
    	    }
 
 		@Override
+		/** Customizes the web security configuration.
+		 * @param web the web
+		 */
 		public void customize(WebSecurity web) {
 			super.customize(web);
 		}

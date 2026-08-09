@@ -16,6 +16,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsChecker;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
+/** Authentication provider for Ding Talk Ma authentication.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 
 @Slf4j
 public class DingTalkMaAuthenticationProvider implements AuthenticationProvider, InitializingBean {
@@ -31,17 +36,19 @@ public class DingTalkMaAuthenticationProvider implements AuthenticationProvider,
     }
 
 	@Override
+	/** Called after properties are set. Validates that required dependencies are available.
+	 */
 	public void afterPropertiesSet() throws Exception {
 
 	}
 
     /**
      *
-     * <p>完成匹配Token的认证，这里返回的对象最终会通过：SecurityContextHolder.getContext().setAuthentication(authResult); 放置在上下文中</p>
+     * <p>Completes authentication matching the token，The returned object will be placed in the context via：SecurityContextHolder.getContext().setAuthentication(authResult); </p>
      * @author [@Loong Wan](https://github.com/loong10k)
-     * @param authentication  {@link DingTalkMaAuthenticationToken IdentityCodeAuthenticationToken} 对象
-     * @return 认证结果{@link Authentication}对象
-     * @throws AuthenticationException  认证失败会抛出异常
+     * @param authentication {@link DingTalkMaAuthenticationToken IdentityCodeAuthenticationToken} object
+     * @return the authentication result{@link Authentication}object
+     * @throws AuthenticationException if authentication fails
      */
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -95,18 +102,31 @@ public class DingTalkMaAuthenticationProvider implements AuthenticationProvider,
     }
 
     @Override
+    /** Indicates whether this provider supports the given authentication class.
+     * @param authentication the authentication
+     * @return the result
+     */
     public boolean supports(Class<?> authentication) {
         return (DingTalkMaAuthenticationToken.class.isAssignableFrom(authentication));
     }
 
+	/** Sets the user details checker.
+	 * @param userDetailsChecker the userDetailsChecker
+	 */
 	public void setUserDetailsChecker(UserDetailsChecker userDetailsChecker) {
 		this.userDetailsChecker = userDetailsChecker;
 	}
 
+	/** Returns the user details checker.
+	 * @return the result
+	 */
 	public UserDetailsChecker getUserDetailsChecker() {
 		return userDetailsChecker;
 	}
 
+	/** Returns the user details service.
+	 * @return the result
+	 */
 	public UserDetailsServiceAdapter getUserDetailsService() {
 		return userDetailsService;
 	}

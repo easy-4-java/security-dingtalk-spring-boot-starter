@@ -35,9 +35,9 @@ import org.springframework.util.StringUtils;
 import java.io.IOException;
 
 /**
- *  企业内部应用免登：https://open.dingtalk.com/document/orgapp-server/enterprise-internal-application-logon-free
- *  第三方企业应用免登： https://open.dingtalk.com/document/orgapp-server/third-party-enterprise-application-logon-free
- *  应用管理后台免登: https://open.dingtalk.com/document/orgapp-server/log-on-site-application-management-backend
+ *  Enterprise internal application free-login：https://open.dingtalk.com/document/orgapp-server/enterprise-internal-application-logon-free
+ *  Third-party enterprise application free-login： https://open.dingtalk.com/document/orgapp-server/third-party-enterprise-application-logon-free
+ *  Application management backend free-login: https://open.dingtalk.com/document/orgapp-server/log-on-site-application-management-backend
  * @author [@Loong Wan](https://github.com/loong10k)
  */
 public class DingTalkTmpCodeAuthenticationProcessingFilter extends AbstractAuthenticationProcessingFilter {
@@ -67,6 +67,11 @@ public class DingTalkTmpCodeAuthenticationProcessingFilter extends AbstractAuthe
 	}
 
     @Override
+    /** Attempts to authenticate the incoming request.
+     * @param request the request
+     * @param response the response
+     * @return the result
+     */
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException, IOException, ServletException {
 
@@ -130,18 +135,34 @@ public class DingTalkTmpCodeAuthenticationProcessingFilter extends AbstractAuthe
 
     }
 
+	/** Extracts the crop id parameter from the HTTP request.
+	 * @param request the request
+	 * @return the result
+	 */
 	protected String obtainCropId(HttpServletRequest request) {
 		return request.getParameter(cropIdParameter);
 	}
 
+    /** Extracts the key parameter from the HTTP request.
+     * @param request the request
+     * @return the result
+     */
     protected String obtainKey(HttpServletRequest request) {
         return request.getParameter(keyParameter);
     }
 
+	/** Extracts the token parameter from the HTTP request.
+	 * @param request the request
+	 * @return the result
+	 */
 	protected String obtainToken(HttpServletRequest request) {
 		return request.getParameter(tokenParameter);
 	}
 
+    /** Extracts the code parameter from the HTTP request.
+     * @param request the request
+     * @return the result
+     */
     protected String obtainCode(HttpServletRequest request) {
         return request.getParameter(codeParameter);
     }
@@ -159,46 +180,80 @@ public class DingTalkTmpCodeAuthenticationProcessingFilter extends AbstractAuthe
 		authRequest.setDetails(authenticationDetailsSource.buildDetails(request));
 	}
 	
+	/** Creates an authentication token from the login request.
+	 * @param loginRequest the loginRequest
+	 * @return the result
+	 */
 	protected AbstractAuthenticationToken authenticationToken(DingTalkTmpCodeLoginRequest loginRequest) {
 		return new DingTalkTmpCodeAuthenticationToken(loginRequest);
 	}
 
+	/** Returns the crop id parameter.
+	 * @return the result
+	 */
 	public String getCropIdParameter() {
 		return cropIdParameter;
 	}
 
+	/** Sets the crop id parameter.
+	 * @param cropIdParameter the cropIdParameter
+	 */
 	public void setCropIdParameter(String cropIdParameter) {
 		this.cropIdParameter = cropIdParameter;
 	}
 
+	/** Returns the key parameter.
+	 * @return the result
+	 */
 	public String getKeyParameter() {
 		return keyParameter;
 	}
 
+	/** Sets the key parameter.
+	 * @param keyParameter the keyParameter
+	 */
 	public void setKeyParameter(String keyParameter) {
 		this.keyParameter = keyParameter;
 	}
 
+	/** Sets the token parameter.
+	 * @param tokenParameter the tokenParameter
+	 */
 	public void setTokenParameter(String tokenParameter) {
 		this.tokenParameter = tokenParameter;
 	}
 
+	/** Returns the token parameter.
+	 * @return the result
+	 */
 	public String getTokenParameter() {
 		return tokenParameter;
 	}
 
+	/** Returns the code parameter.
+	 * @return the result
+	 */
 	public String getCodeParameter() {
 		return codeParameter;
 	}
 
+	/** Sets the code parameter.
+	 * @param codeParameter the codeParameter
+	 */
 	public void setCodeParameter(String codeParameter) {
 		this.codeParameter = codeParameter;
 	}
 
+	/** Returns whether the post only is enabled.
+	 * @return the result
+	 */
 	public boolean isPostOnly() {
 		return postOnly;
 	}
 
+	/** Sets the post only.
+	 * @param postOnly the postOnly
+	 */
 	public void setPostOnly(boolean postOnly) {
 		this.postOnly = postOnly;
 	}

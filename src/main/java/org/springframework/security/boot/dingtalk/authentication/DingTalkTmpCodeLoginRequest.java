@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 /**
- * 企业内部应用免登、第三方企业应用免登、应用管理后台免登
+ * Enterprise internal application free-login、Third-party enterprise application free-login、Application management backend free-login
  * @author [@Loong Wan](https://github.com/loong10k)
  */
 @Data
@@ -14,19 +14,19 @@ import lombok.Data;
 public class DingTalkTmpCodeLoginRequest {
 
 	/**
-	 * 	企业的corpid
+	 * 	enterprise corpid
 	 */
 	protected String corpId;
 	/**
-	 * 	应用的唯一标识key
+	 * 	application uniqueidentifierkey
 	 */
 	protected String key;
 	/**
-	 * 临时登录凭证code
+	 * temporarylogincredentialcode
 	 */
 	protected String code;
 	/**
-	 * 	当前请求使用的token，用于绑定用户
+	 * 	request token，used forbindinguser
 	 */
 	protected String token;
 	/**

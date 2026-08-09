@@ -7,6 +7,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.boot.dingtalk.authentication.DingTalkMatchedAuthenticationEntryPoint;
 import org.springframework.security.boot.dingtalk.authentication.DingTalkMatchedAuthenticationFailureHandler;
+/** Auto-configuration for Security Ding Talk.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 
 @Configuration
 @AutoConfigureBefore({ SecurityFilterAutoConfiguration.class })
@@ -14,6 +19,9 @@ import org.springframework.security.boot.dingtalk.authentication.DingTalkMatched
 public class SecurityDingTalkAutoConfiguration {
 	
 	@Bean
+	/** Creates a dingtalk matched authentication entry point bean.
+	 * @return the result
+	 */
 	public DingTalkMatchedAuthenticationEntryPoint dingtalkMatchedAuthenticationEntryPoint() {
 		return new DingTalkMatchedAuthenticationEntryPoint();
 	}

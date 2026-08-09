@@ -38,6 +38,11 @@ import org.springframework.security.web.authentication.session.SessionAuthentica
 
 import java.util.List;
 import java.util.stream.Collectors;
+/** Configuration for Ding Talk Tmp Code authentication filter chain.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 
 @Configuration
 @AutoConfigureBefore({ SecurityFilterAutoConfiguration.class })
@@ -45,11 +50,22 @@ import java.util.stream.Collectors;
 public class SecurityDingTalkTmpCodeFilterConfiguration {
 	
 	@Bean
+	/** Creates a ding talk tmp code authentication provider bean.
+	 * @param userDetailsServiceProvider the userDetailsServiceProvider
+	 * @param dingtalkTemplateProvider the dingtalkTemplateProvider
+	 * @param dingtalkProperties the dingtalkProperties
+	 * @return the result
+	 */
 	public DingTalkTmpCodeAuthenticationProvider dingTalkTmpCodeAuthenticationProvider(ObjectProvider<UserDetailsServiceAdapter> userDetailsServiceProvider,
 																					   ObjectProvider<DingTalkTemplate> dingtalkTemplateProvider,
 																					   SecurityDingTalkProperties dingtalkProperties) {
 		return new DingTalkTmpCodeAuthenticationProvider(userDetailsServiceProvider.getIfAvailable(), dingtalkTemplateProvider.getIfAvailable(), dingtalkProperties);
 	}
+   	/** Adapter implementation for Ding Talk Tmp Code Web Security Customizer.
+   	 *
+   	 * @author [@Loong Wan](https://github.com/loong10k)
+   	 * @since 1.0.0
+   	 */
 	
     @Configuration
     @ConditionalOnProperty(prefix = SecurityDingTalkProperties.PREFIX, value = "enabled", havingValue = "true")
@@ -102,12 +118,15 @@ public class SecurityDingTalkTmpCodeFilterConfiguration {
    			
    		}
    		
+   	    /** Creates and configures the authentication processing filter.
+   	     * @return the result
+   	     */
    	    public DingTalkTmpCodeAuthenticationProcessingFilter authenticationProcessingFilter() throws Exception {
    	    	
    			DingTalkTmpCodeAuthenticationProcessingFilter authenticationFilter = new DingTalkTmpCodeAuthenticationProcessingFilter(objectMapper);
    			
 			/**
-			 * 批量设置参数
+			 * 
 			 */
 			PropertyMapper map = PropertyMapper.get().alwaysApplyingWhenNonNull();
 			
@@ -130,6 +149,10 @@ public class SecurityDingTalkTmpCodeFilterConfiguration {
 
 		@Bean
 		@Order(SecurityProperties.DEFAULT_FILTER_ORDER + 13)
+		/** Configures the ding talk ma security filter chain.
+		 * @param http the http
+		 * @return the result
+		 */
 		public SecurityFilterChain dingTalkMaSecurityFilterChain(HttpSecurity http) throws Exception {
 
 			http.securityMatcher(authcProperties.getPathPattern())
@@ -151,6 +174,9 @@ public class SecurityDingTalkTmpCodeFilterConfiguration {
 		}
 
 		@Override
+		/** Customizes the web security configuration.
+		 * @param web the web
+		 */
 		public void customize(WebSecurity web) {
 			super.customize(web);
 		}

@@ -20,6 +20,11 @@ import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
+/** Authentication token for Ding Talk Scan Code authentication.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 
 @SuppressWarnings("serial")
 public class DingTalkScanCodeAuthenticationToken extends AbstractAuthenticationToken {
@@ -27,15 +32,15 @@ public class DingTalkScanCodeAuthenticationToken extends AbstractAuthenticationT
 	private Object principal;
 	private Object credentials;
 	/**
-	 * 第三方平台UnionID（通常指第三方账号体系下用户的唯一ID）
+	 * third-partyplatformUnionID（third-partyuser uniqueID）
 	 */
 	protected String unionid;
 	/**
-	 * 第三方平台OpenID（通常指第三方账号体系下某应用中用户的唯一ID）
+	 * third-partyplatformOpenID（third-partyapplicationuser uniqueID）
 	 */
 	protected String openid;
 	/**
-	 * 用户信息
+	 * userinformation
 	 */
 	protected OapiSnsGetuserinfoBycodeResponse.UserInfo userInfo ;
 
@@ -64,20 +69,32 @@ public class DingTalkScanCodeAuthenticationToken extends AbstractAuthenticationT
 	// ========================================================================================================
 
 	@Override
+	/** Returns the credentials.
+	 * @return the result
+	 */
 	public Object getCredentials() {
 		return this.credentials;
 	}
 
 	@Override
+	/** Returns the principal.
+	 * @return the result
+	 */
 	public Object getPrincipal() {
 		return this.principal;
 	}
 	
+	/** Sets the principal.
+	 * @param principal the principal
+	 */
 	public void setPrincipal(Object principal) {
 		this.principal = principal;
 	}
 
 	@Override
+	/** Sets the authenticated.
+	 * @param isAuthenticated the isAuthenticated
+	 */
 	public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
 		if (isAuthenticated) {
 			throw new IllegalArgumentException(
@@ -88,23 +105,37 @@ public class DingTalkScanCodeAuthenticationToken extends AbstractAuthenticationT
 	}
 
 	@Override
+	/** Erases the sensitive credentials from this token.
+	 */
 	public void eraseCredentials() {
 		super.eraseCredentials();
 		credentials = null;
 	}
 
+	/** Returns the unionid.
+	 * @return the result
+	 */
 	public String getUnionid() {
 		return unionid;
 	}
 
+	/** Sets the unionid.
+	 * @param unionid the unionid
+	 */
 	public void setUnionid(String unionid) {
 		this.unionid = unionid;
 	}
 
+	/** Returns the openid.
+	 * @return the result
+	 */
 	public String getOpenid() {
 		return openid;
 	}
 
+	/** Sets the openid.
+	 * @param openid the openid
+	 */
 	public void setOpenid(String openid) {
 		this.openid = openid;
 	}
@@ -113,6 +144,9 @@ public class DingTalkScanCodeAuthenticationToken extends AbstractAuthenticationT
 		return userInfo;
 	}
 
+	/** Sets the user info.
+	 * @param userInfo the userInfo
+	 */
 	public void setUserInfo(OapiSnsGetuserinfoBycodeResponse.UserInfo userInfo) {
 		this.userInfo = userInfo;
 	}
