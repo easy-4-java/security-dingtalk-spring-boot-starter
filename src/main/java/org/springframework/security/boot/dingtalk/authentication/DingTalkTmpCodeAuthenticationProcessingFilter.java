@@ -29,7 +29,8 @@ import org.springframework.security.boot.utils.WebUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
@@ -57,11 +58,11 @@ public class DingTalkTmpCodeAuthenticationProcessingFilter extends AbstractAuthe
     private ObjectMapper objectMapper = new ObjectMapper();
     
     public DingTalkTmpCodeAuthenticationProcessingFilter(ObjectMapper objectMapper) {
-    	super(new AntPathRequestMatcher("/login/dingtalk/tmpcode"));
+    	super(PathPatternRequestMatcher.pathPattern("/login/dingtalk/tmpcode"));
 		this.objectMapper = objectMapper;
 	}
-	
-	public DingTalkTmpCodeAuthenticationProcessingFilter(ObjectMapper objectMapper, AntPathRequestMatcher requestMatcher) {
+
+	public DingTalkTmpCodeAuthenticationProcessingFilter(ObjectMapper objectMapper, RequestMatcher requestMatcher) {
 		super(requestMatcher);
 		this.objectMapper = objectMapper;
 	}

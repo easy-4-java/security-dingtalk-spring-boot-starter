@@ -35,13 +35,13 @@ public class DingTalkTmpCodeAuthenticationToken extends AbstractAuthenticationTo
 	private Object credentials;
 
 	public DingTalkTmpCodeAuthenticationToken(Object principal) {
-		super(null);
+		super((Collection<? extends GrantedAuthority>) null);
 		this.principal = principal;
 		setAuthenticated(false);
 	}
 
 	public DingTalkTmpCodeAuthenticationToken(Object principal, String credentials) {
-		super(null);
+		super((Collection<? extends GrantedAuthority>) null);
 		this.principal = principal;
 		this.credentials = credentials;
 		setAuthenticated(false);

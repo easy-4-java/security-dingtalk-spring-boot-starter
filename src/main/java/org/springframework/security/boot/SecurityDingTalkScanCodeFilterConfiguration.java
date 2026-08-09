@@ -6,12 +6,12 @@ import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.biz.web.servlet.i18n.LocaleContextFilter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration;
+import org.springframework.boot.security.autoconfigure.web.servlet.SecurityFilterAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.context.properties.PropertyMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.boot.biz.authentication.AuthenticationListener;
@@ -126,7 +126,7 @@ public class SecurityDingTalkScanCodeFilterConfiguration {
 			/**
 			 * 
 			 */
-			PropertyMapper map = PropertyMapper.get().alwaysApplyingWhenNonNull();
+			PropertyMapper map = PropertyMapper.get();
 			
 			map.from(getSessionMgtProperties().isAllowSessionCreation()).to(authenticationFilter::setAllowSessionCreation);
 			
@@ -146,7 +146,7 @@ public class SecurityDingTalkScanCodeFilterConfiguration {
    	    }
 
 		@Bean
-		@Order(SecurityProperties.DEFAULT_FILTER_ORDER + 12)
+		@Order(Ordered.HIGHEST_PRECEDENCE + 112)
 		/** Configures the ding talk ma security filter chain.
 		 * @param http the http
 		 * @return the result

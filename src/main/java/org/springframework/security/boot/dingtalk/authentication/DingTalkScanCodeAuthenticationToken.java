@@ -45,13 +45,13 @@ public class DingTalkScanCodeAuthenticationToken extends AbstractAuthenticationT
 	protected OapiSnsGetuserinfoBycodeResponse.UserInfo userInfo ;
 
 	public DingTalkScanCodeAuthenticationToken(Object principal) {
-		super(null);
+		super((Collection<? extends GrantedAuthority>) null);
 		this.principal = principal;
 		setAuthenticated(false);
 	}
 
 	public DingTalkScanCodeAuthenticationToken(Object principal, String credentials) {
-		super(null);
+		super((Collection<? extends GrantedAuthority>) null);
 		this.principal = principal;
 		this.credentials = credentials;
 		setAuthenticated(false);

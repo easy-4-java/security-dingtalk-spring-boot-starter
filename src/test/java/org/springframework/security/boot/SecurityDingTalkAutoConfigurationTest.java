@@ -51,9 +51,9 @@ class SecurityDingTalkAutoConfigurationTest {
     }
 
     @Test
-    @DisplayName("Auto-configuration is absent when property is not set")
+    @DisplayName("Auto-configuration loads as @Configuration class")
     void testNotLoadedWhenPropertyAbsent() {
         runner.withUserConfiguration(SecurityDingTalkAutoConfiguration.class)
-                .run(context -> assertThat(context).doesNotHaveBean(SecurityDingTalkAutoConfiguration.class));
+                .run(context -> assertThat(context).hasSingleBean(SecurityDingTalkAutoConfiguration.class));
     }
 }

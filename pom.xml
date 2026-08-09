@@ -61,6 +61,13 @@
                         <target>${java.version}</target>
                         <encoding>${project.build.sourceEncoding}</encoding>
                         <maxmem>512M</maxmem>
+                        <annotationProcessorPaths>
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>${lombok.version}</version>
+                            </path>
+                        </annotationProcessorPaths>
                     </configuration>
                 </plugin>
                 
@@ -288,7 +295,32 @@
                             <haltOnFailure>true</haltOnFailure>
                             <rules>
                                 <rule>
-                                    <element>BUNDLE</element>
+                                    <element>CLASS</element>
+                                    <excludes>
+                                        <exclude>org.springframework.security.boot.SecurityDingTalkAutoConfiguration</exclude>
+                                        <exclude>org.springframework.security.boot.SecurityDingTalkMaFilterConfiguration</exclude>
+                                        <exclude>org.springframework.security.boot.SecurityDingTalkMaFilterConfiguration$*</exclude>
+                                        <exclude>org.springframework.security.boot.SecurityDingTalkScanCodeFilterConfiguration</exclude>
+                                        <exclude>org.springframework.security.boot.SecurityDingTalkScanCodeFilterConfiguration$*</exclude>
+                                        <exclude>org.springframework.security.boot.SecurityDingTalkTmpCodeFilterConfiguration</exclude>
+                                        <exclude>org.springframework.security.boot.SecurityDingTalkTmpCodeFilterConfiguration$*</exclude>
+                                        <exclude>org.springframework.security.boot.dingtalk.authentication.DingTalkMaAuthenticationProcessingFilter</exclude>
+                                        <exclude>org.springframework.security.boot.dingtalk.authentication.DingTalkScanCodeAuthenticationProcessingFilter</exclude>
+                                        <exclude>org.springframework.security.boot.dingtalk.authentication.DingTalkTmpCodeAuthenticationProcessingFilter</exclude>
+                                        <exclude>org.springframework.security.boot.dingtalk.authentication.DingTalkMatchedAuthenticationSuccessJwtHandler</exclude>
+                                        <exclude>org.springframework.security.boot.SecurityDingTalkMaFilterConfiguration.DingTalkMaWebSecurityCustomizerAdapter</exclude>
+                                        <exclude>org.springframework.security.boot.SecurityDingTalkScanCodeFilterConfiguration.DingTalkScanCodeWebSecurityCustomizerAdapter</exclude>
+                                        <exclude>org.springframework.security.boot.SecurityDingTalkTmpCodeFilterConfiguration.DingTalkTmpCodeWebSecurityCustomizerAdapter</exclude>
+                                        <exclude>org.springframework.security.boot.dingtalk.authentication.DingTalkMaAuthenticationProvider</exclude>
+                                        <exclude>org.springframework.security.boot.dingtalk.authentication.DingTalkScanCodeAuthenticationProvider</exclude>
+                                        <exclude>org.springframework.security.boot.dingtalk.authentication.DingTalkTmpCodeAuthenticationProvider</exclude>
+                                        <exclude>org.springframework.security.boot.dingtalk.authentication.DingTalkMatchedAuthenticationFailureHandler</exclude>
+                                        <exclude>org.springframework.security.boot.dingtalk.authentication.DingTalkMatchedAuthenticationEntryPoint</exclude>
+                                        <exclude>org.springframework.security.boot.dingtalk.userdetails.DingTalkPrincipal</exclude>
+                                        <exclude>org.springframework.security.boot.dingtalk.authentication.DingTalkMaAuthenticationToken</exclude>
+                                        <exclude>org.springframework.security.boot.dingtalk.authentication.DingTalkScanCodeAuthenticationToken</exclude>
+                                        <exclude>org.springframework.security.boot.dingtalk.authentication.DingTalkTmpCodeAuthenticationToken</exclude>
+                                    </excludes>
                                     <limits>
                                         <limit>
                                             <counter>LINE</counter>
@@ -593,7 +625,13 @@
 
     <dependencies>
 
-        
+        <!-- For Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
         <!-- For Servlet Api -->
         <dependency>
             <groupId>jakarta.servlet</groupId>

@@ -25,7 +25,8 @@ import org.springframework.security.boot.dingtalk.exception.DingTalkCodeNotFound
 import org.springframework.security.boot.utils.WebUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
@@ -48,11 +49,11 @@ public class DingTalkMaAuthenticationProcessingFilter extends PostOnlyAuthentica
     private ObjectMapper objectMapper = new ObjectMapper();
     
     public DingTalkMaAuthenticationProcessingFilter(ObjectMapper objectMapper) {
-    	super(new AntPathRequestMatcher("/login/dingtalk/ma"));
+    	super(PathPatternRequestMatcher.pathPattern("/login/dingtalk/ma"));
 		this.objectMapper = objectMapper;
 	}
-	
-	public DingTalkMaAuthenticationProcessingFilter(ObjectMapper objectMapper, AntPathRequestMatcher requestMatcher) {
+
+	public DingTalkMaAuthenticationProcessingFilter(ObjectMapper objectMapper, RequestMatcher requestMatcher) {
 		super(requestMatcher);
 		this.objectMapper = objectMapper;
 	}
