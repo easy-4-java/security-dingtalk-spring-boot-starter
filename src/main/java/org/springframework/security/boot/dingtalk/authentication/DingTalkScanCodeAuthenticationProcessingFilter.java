@@ -37,7 +37,7 @@ import java.io.IOException;
 
 /**
  * 扫码登录第三方网站: https://open.dingtalk.com/document/orgapp-server/scan-qr-code-to-log-on-to-third-party-websites
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 @Slf4j
 public class DingTalkScanCodeAuthenticationProcessingFilter extends AbstractAuthenticationProcessingFilter {
