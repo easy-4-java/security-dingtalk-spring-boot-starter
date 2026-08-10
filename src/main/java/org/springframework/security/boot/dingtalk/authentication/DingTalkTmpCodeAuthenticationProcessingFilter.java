@@ -38,7 +38,7 @@ import java.io.IOException;
  *  企业内部应用免登：https://open.dingtalk.com/document/orgapp-server/enterprise-internal-application-logon-free
  *  第三方企业应用免登： https://open.dingtalk.com/document/orgapp-server/third-party-enterprise-application-logon-free
  *  应用管理后台免登: https://open.dingtalk.com/document/orgapp-server/log-on-site-application-management-backend
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 public class DingTalkTmpCodeAuthenticationProcessingFilter extends AbstractAuthenticationProcessingFilter {
 
