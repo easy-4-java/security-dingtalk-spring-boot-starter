@@ -40,7 +40,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 /** Configuration for Ding Talk Tmp Code authentication filter chain.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 
@@ -63,7 +63,7 @@ public class SecurityDingTalkTmpCodeFilterConfiguration {
 	}
    	/** Adapter implementation for Ding Talk Tmp Code Web Security Customizer.
    	 *
-   	 * @author [@Loong Wan](https://github.com/loong10k)
+   	 * @author <a href="https://github.com/loong10k">Loong Wan</a>
    	 * @since 1.0.0
    	 */
 	

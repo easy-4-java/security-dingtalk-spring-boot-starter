@@ -48,7 +48,7 @@ public class DingTalkTmpCodeAuthenticationProvider implements AuthenticationProv
     /**
      * 
      * <p>Completes authentication matching the token，The returned object will be placed in the context via：SecurityContextHolder.getContext().setAuthentication(authResult); </p>
-     * @author [@Loong Wan](https://github.com/loong10k)
+     * @author <a href="https://github.com/loong10k">Loong Wan</a>
      * @param authentication {@link DingTalkTmpCodeAuthenticationToken IdentityCodeAuthenticationToken} object
      * @return the authentication result{@link Authentication}object
      * @throws AuthenticationException if authentication fails

@@ -7,7 +7,7 @@ import lombok.Data;
 
 /**
  * Enterprise internal application free-login、Third-party enterprise application free-login、Application management backend free-login
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)

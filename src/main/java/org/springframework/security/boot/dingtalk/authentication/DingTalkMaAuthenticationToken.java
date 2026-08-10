@@ -21,7 +21,7 @@ import org.springframework.security.core.GrantedAuthority;
 import java.util.Collection;
 /** Authentication token for Ding Talk Ma authentication.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 

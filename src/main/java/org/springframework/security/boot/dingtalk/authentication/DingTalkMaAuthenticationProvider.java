@@ -18,7 +18,7 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 /** Authentication provider for Ding Talk Ma authentication.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 
@@ -45,7 +45,7 @@ public class DingTalkMaAuthenticationProvider implements AuthenticationProvider,
     /**
      *
      * <p>Completes authentication matching the token，The returned object will be placed in the context via：SecurityContextHolder.getContext().setAuthentication(authResult); </p>
-     * @author [@Loong Wan](https://github.com/loong10k)
+     * @author <a href="https://github.com/loong10k">Loong Wan</a>
      * @param authentication {@link DingTalkMaAuthenticationToken IdentityCodeAuthenticationToken} object
      * @return the authentication result{@link Authentication}object
      * @throws AuthenticationException if authentication fails

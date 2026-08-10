@@ -7,7 +7,7 @@ import lombok.Data;
 
 /**
  * DingTalk scan-code login authorization for third-party systems
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)

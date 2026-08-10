@@ -25,7 +25,7 @@ import org.springframework.security.boot.biz.property.SecurityLogoutProperties;
 import org.springframework.security.boot.dingtalk.authentication.DingTalkScanCodeAuthenticationProcessingFilter;
 /** Configuration properties for Ding Talk Scan Code Authc.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 
