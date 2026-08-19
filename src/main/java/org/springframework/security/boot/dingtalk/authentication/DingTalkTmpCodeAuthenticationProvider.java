@@ -58,13 +58,7 @@ public class DingTalkTmpCodeAuthenticationProvider implements AuthenticationProv
      * @param authentication {@link DingTalkTmpCodeAuthenticationToken IdentityCodeAuthenticationToken} object
      * @return the authentication result{@link Authentication}object
      * @throws AuthenticationException if authentication fails
-     */
     @Override
-    /**
-     * <p>Authenticate.</p>
-     * @param authentication
-     * @return the authenticate
-     */
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         
     	Assert.notNull(authentication, "No authentication data provided");
