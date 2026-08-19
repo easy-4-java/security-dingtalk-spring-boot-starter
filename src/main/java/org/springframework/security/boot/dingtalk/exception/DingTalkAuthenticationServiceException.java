@@ -21,14 +21,26 @@ import org.springframework.security.boot.biz.exception.AuthenticationServiceExce
 /**
  * Exception thrown when a DingTalk server-side authentication error occurs
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 @SuppressWarnings("serial")
 public class DingTalkAuthenticationServiceException extends AuthenticationServiceExceptionAdapter {
 
+	/**
+	 * Constructs a new ding talk authentication service exception instance.
+	 *
+	 * @param msg the msg
+	 */
 	public DingTalkAuthenticationServiceException( String msg) {
 		super(AuthResponseCode.SC_AUTHZ_THIRD_PARTY_SERVICE, msg);
 	}
 	
+	/**
+	 * Constructs a new ding talk authentication service exception instance.
+	 *
+	 * @param msg the msg
+	 * @param t the t
+	 */
 	public DingTalkAuthenticationServiceException( String msg, Throwable t) {
 		super(AuthResponseCode.SC_AUTHZ_THIRD_PARTY_SERVICE,msg, t);
 	}

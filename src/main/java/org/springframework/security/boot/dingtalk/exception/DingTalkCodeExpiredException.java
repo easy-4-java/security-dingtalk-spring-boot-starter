@@ -11,10 +11,21 @@ import org.springframework.security.boot.biz.exception.AuthenticationExceptionAd
 @SuppressWarnings("serial")
 public class DingTalkCodeExpiredException extends AuthenticationExceptionAdapter {
 
+	/**
+	 * Constructs a new ding talk code expired exception instance.
+	 *
+	 * @param msg the msg
+	 */
 	public DingTalkCodeExpiredException(String msg) {
 		super(AuthResponseCode.SC_AUTHZ_CODE_EXPIRED, msg);
 	}
 	
+	/**
+	 * Constructs a new ding talk code expired exception instance.
+	 *
+	 * @param msg the msg
+	 * @param t the t
+	 */
 	public DingTalkCodeExpiredException(String msg, Throwable t) {
 		super(AuthResponseCode.SC_AUTHZ_CODE_EXPIRED, msg, t);
 	}

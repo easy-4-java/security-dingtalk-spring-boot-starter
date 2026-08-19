@@ -44,12 +44,23 @@ public class DingTalkScanCodeAuthenticationToken extends AbstractAuthenticationT
 	 */
 	protected OapiSnsGetuserinfoBycodeResponse.UserInfo userInfo ;
 
+	/**
+	 * Constructs a new ding talk scan code authentication token instance.
+	 *
+	 * @param principal the principal
+	 */
 	public DingTalkScanCodeAuthenticationToken(Object principal) {
 		super((Collection<? extends GrantedAuthority>) null);
 		this.principal = principal;
 		setAuthenticated(false);
 	}
 
+	/**
+	 * Constructs a new ding talk scan code authentication token instance.
+	 *
+	 * @param principal the principal
+	 * @param credentials the credentials
+	 */
 	public DingTalkScanCodeAuthenticationToken(Object principal, String credentials) {
 		super((Collection<? extends GrantedAuthority>) null);
 		this.principal = principal;
@@ -57,6 +68,13 @@ public class DingTalkScanCodeAuthenticationToken extends AbstractAuthenticationT
 		setAuthenticated(false);
 	}
 
+	/**
+	 * Constructs a new ding talk scan code authentication token instance.
+	 *
+	 * @param principal the principal
+	 * @param credentials the credentials
+	 * @param authorities the authorities
+	 */
 	public DingTalkScanCodeAuthenticationToken(Object principal, Object credentials,
                                                Collection<? extends GrantedAuthority> authorities) {
 		super(authorities);
@@ -140,6 +158,11 @@ public class DingTalkScanCodeAuthenticationToken extends AbstractAuthenticationT
 		this.openid = openid;
 	}
 
+	/**
+	 * Returns the user info.
+	 *
+	 * @return the user info
+	 */
 	public OapiSnsGetuserinfoBycodeResponse.UserInfo getUserInfo() {
 		return userInfo;
 	}

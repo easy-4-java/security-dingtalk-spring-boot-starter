@@ -29,6 +29,12 @@ public class DingTalkMaAuthenticationProvider implements AuthenticationProvider,
     private final UserDetailsServiceAdapter userDetailsService;
     private final DingTalkTemplate dingTalkTemplate;
 
+    /**
+     * Constructs a new ding talk ma authentication provider instance.
+     *
+     * @param userDetailsService the user details service
+     * @param dingTalkTemplate the ding talk template
+     */
     public DingTalkMaAuthenticationProvider(final UserDetailsServiceAdapter userDetailsService,
     		final DingTalkTemplate dingTalkTemplate) {
         this.userDetailsService = userDetailsService;
@@ -49,6 +55,13 @@ public class DingTalkMaAuthenticationProvider implements AuthenticationProvider,
      * @param authentication {@link DingTalkMaAuthenticationToken IdentityCodeAuthenticationToken} object
      * @return the authentication result{@link Authentication}object
      * @throws AuthenticationException if authentication fails
+    /**
+     * authenticate.
+     *
+     * @param authentication the authentication
+     * @return the result
+     * @throws AuthenticationException if an error occurs
+     */
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 

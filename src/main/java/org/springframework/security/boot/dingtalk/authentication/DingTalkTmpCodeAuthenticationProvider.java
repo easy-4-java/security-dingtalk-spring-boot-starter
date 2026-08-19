@@ -36,6 +36,13 @@ public class DingTalkTmpCodeAuthenticationProvider implements AuthenticationProv
 	private final SecurityDingTalkProperties dingtalkProperties;
 	private final DingTalkTemplate dingTalkTemplate;
 
+    /**
+     * Constructs a new ding talk tmp code authentication provider instance.
+     *
+     * @param userDetailsService the user details service
+     * @param dingTalkTemplate the ding talk template
+     * @param dingtalkProperties the dingtalk properties
+     */
     public DingTalkTmpCodeAuthenticationProvider(final UserDetailsServiceAdapter userDetailsService,
     		final DingTalkTemplate dingTalkTemplate,
 		    final SecurityDingTalkProperties dingtalkProperties) {
@@ -58,6 +65,13 @@ public class DingTalkTmpCodeAuthenticationProvider implements AuthenticationProv
      * @param authentication {@link DingTalkTmpCodeAuthenticationToken IdentityCodeAuthenticationToken} object
      * @return the authentication result{@link Authentication}object
      * @throws AuthenticationException if authentication fails
+    /**
+     * authenticate.
+     *
+     * @param authentication the authentication
+     * @return the result
+     * @throws AuthenticationException if an error occurs
+     */
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         

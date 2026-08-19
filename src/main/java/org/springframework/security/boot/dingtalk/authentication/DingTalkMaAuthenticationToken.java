@@ -34,12 +34,23 @@ public class DingTalkMaAuthenticationToken extends AbstractAuthenticationToken {
 	private Object principal;
 	private Object credentials;
 
+	/**
+	 * Constructs a new ding talk ma authentication token instance.
+	 *
+	 * @param principal the principal
+	 */
 	public DingTalkMaAuthenticationToken(Object principal) {
 		super(null);
 		this.principal = principal;
 		setAuthenticated(false);
 	}
 
+	/**
+	 * Constructs a new ding talk ma authentication token instance.
+	 *
+	 * @param principal the principal
+	 * @param credentials the credentials
+	 */
 	public DingTalkMaAuthenticationToken(Object principal, String credentials) {
 		super(null);
 		this.principal = principal;
@@ -47,6 +58,13 @@ public class DingTalkMaAuthenticationToken extends AbstractAuthenticationToken {
 		setAuthenticated(false);
 	}
 
+	/**
+	 * Constructs a new ding talk ma authentication token instance.
+	 *
+	 * @param principal the principal
+	 * @param credentials the credentials
+	 * @param authorities the authorities
+	 */
 	public DingTalkMaAuthenticationToken(Object principal, Object credentials,
 			Collection<? extends GrantedAuthority> authorities) {
 		super(authorities);

@@ -54,11 +54,22 @@ public class DingTalkMaAuthenticationProcessingFilter extends PostOnlyAuthentica
     
     private ObjectMapper objectMapper = new ObjectMapper();
     
+    /**
+     * Constructs a new ding talk ma authentication processing filter instance.
+     *
+     * @param objectMapper the object mapper
+     */
     public DingTalkMaAuthenticationProcessingFilter(ObjectMapper objectMapper) {
     	super(PathPatternRequestMatcher.pathPattern("/login/dingtalk/ma"));
 		this.objectMapper = objectMapper;
 	}
 
+	/**
+	 * Constructs a new ding talk ma authentication processing filter instance.
+	 *
+	 * @param objectMapper the object mapper
+	 * @param requestMatcher the request matcher
+	 */
 	public DingTalkMaAuthenticationProcessingFilter(ObjectMapper objectMapper, RequestMatcher requestMatcher) {
 		super(requestMatcher);
 		this.objectMapper = objectMapper;

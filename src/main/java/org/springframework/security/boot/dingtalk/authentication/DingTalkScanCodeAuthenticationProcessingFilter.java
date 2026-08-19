@@ -39,6 +39,7 @@ import java.io.IOException;
 /**
  * Scan QR code to log on to third-party websites: https://open.dingtalk.com/document/orgapp-server/scan-qr-code-to-log-on-to-third-party-websites
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 @Slf4j
 public class DingTalkScanCodeAuthenticationProcessingFilter extends AbstractAuthenticationProcessingFilter {
@@ -56,11 +57,22 @@ public class DingTalkScanCodeAuthenticationProcessingFilter extends AbstractAuth
     private boolean postOnly = false;
     private ObjectMapper objectMapper = new ObjectMapper();
 
+    /**
+     * Constructs a new ding talk scan code authentication processing filter instance.
+     *
+     * @param objectMapper the object mapper
+     */
     public DingTalkScanCodeAuthenticationProcessingFilter(ObjectMapper objectMapper) {
     	super(PathPatternRequestMatcher.pathPattern("/login/dingtalk/scancode"));
 		this.objectMapper = objectMapper;
 	}
 
+	/**
+	 * Constructs a new ding talk scan code authentication processing filter instance.
+	 *
+	 * @param objectMapper the object mapper
+	 * @param requestMatcher the request matcher
+	 */
 	public DingTalkScanCodeAuthenticationProcessingFilter(ObjectMapper objectMapper, RequestMatcher requestMatcher) {
 		super(requestMatcher);
 		this.objectMapper = objectMapper;

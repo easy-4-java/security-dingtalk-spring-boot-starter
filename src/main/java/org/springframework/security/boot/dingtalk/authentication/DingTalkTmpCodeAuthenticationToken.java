@@ -34,12 +34,23 @@ public class DingTalkTmpCodeAuthenticationToken extends AbstractAuthenticationTo
 	private Object principal;
 	private Object credentials;
 
+	/**
+	 * Constructs a new ding talk tmp code authentication token instance.
+	 *
+	 * @param principal the principal
+	 */
 	public DingTalkTmpCodeAuthenticationToken(Object principal) {
 		super((Collection<? extends GrantedAuthority>) null);
 		this.principal = principal;
 		setAuthenticated(false);
 	}
 
+	/**
+	 * Constructs a new ding talk tmp code authentication token instance.
+	 *
+	 * @param principal the principal
+	 * @param credentials the credentials
+	 */
 	public DingTalkTmpCodeAuthenticationToken(Object principal, String credentials) {
 		super((Collection<? extends GrantedAuthority>) null);
 		this.principal = principal;
@@ -47,6 +58,13 @@ public class DingTalkTmpCodeAuthenticationToken extends AbstractAuthenticationTo
 		setAuthenticated(false);
 	}
 
+	/**
+	 * Constructs a new ding talk tmp code authentication token instance.
+	 *
+	 * @param principal the principal
+	 * @param credentials the credentials
+	 * @param authorities the authorities
+	 */
 	public DingTalkTmpCodeAuthenticationToken(Object principal, Object credentials,
 			Collection<? extends GrantedAuthority> authorities) {
 		super(authorities);

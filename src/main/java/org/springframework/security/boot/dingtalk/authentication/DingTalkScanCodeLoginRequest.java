@@ -8,6 +8,7 @@ import lombok.Data;
 /**
  * DingTalk scan-code login authorization for third-party systems
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -30,6 +31,10 @@ public class DingTalkScanCodeLoginRequest {
 	 */
 	protected String loginTmpCode;
 
+	/**
+	 * Constructs a new ding talk scan code login request instance.
+	 *
+	 */
 	@JsonIgnoreProperties(ignoreUnknown = true)
 	@JsonCreator
 	public DingTalkScanCodeLoginRequest(@JsonProperty("corpId") String corpId,

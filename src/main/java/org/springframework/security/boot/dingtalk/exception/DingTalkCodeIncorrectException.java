@@ -11,10 +11,21 @@ import org.springframework.security.boot.biz.exception.AuthenticationExceptionAd
 @SuppressWarnings("serial")
 public class DingTalkCodeIncorrectException extends AuthenticationExceptionAdapter {
 
+	/**
+	 * Constructs a new ding talk code incorrect exception instance.
+	 *
+	 * @param msg the msg
+	 */
 	public DingTalkCodeIncorrectException(String msg) {
 		super(AuthResponseCode.SC_AUTHZ_CODE_INCORRECT, msg);
 	}
 	
+	/**
+	 * Constructs a new ding talk code incorrect exception instance.
+	 *
+	 * @param msg the msg
+	 * @param t the t
+	 */
 	public DingTalkCodeIncorrectException(String msg, Throwable t) {
 		super(AuthResponseCode.SC_AUTHZ_CODE_INCORRECT, msg, t);
 	}

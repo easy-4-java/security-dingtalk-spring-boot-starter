@@ -24,6 +24,7 @@ import java.util.Collection;
  * TODO
  * 
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 @SuppressWarnings("serial")
 public class DingTalkPrincipal extends SecurityPrincipal {
@@ -121,14 +122,39 @@ public class DingTalkPrincipal extends SecurityPrincipal {
 	 */
 	protected String stateCode;
 
+	/**
+	 * Constructs a new ding talk principal instance.
+	 *
+	 * @param username the username
+	 * @param password the password
+	 * @param roles the roles
+	 */
 	public DingTalkPrincipal(String username, String password, String... roles) {
 		super(username, password, roles);
 	}
 
+	/**
+	 * Constructs a new ding talk principal instance.
+	 *
+	 * @param username the username
+	 * @param password the password
+	 * @param authorities the authorities
+	 */
 	public DingTalkPrincipal(String username, String password, Collection<? extends GrantedAuthority> authorities) {
 		super(username, password, authorities);
 	}
 
+	/**
+	 * Constructs a new ding talk principal instance.
+	 *
+	 * @param username the username
+	 * @param password the password
+	 * @param enabled the enabled
+	 * @param accountNonExpired the account non expired
+	 * @param credentialsNonExpired the credentials non expired
+	 * @param accountNonLocked the account non locked
+	 * @param authorities the authorities
+	 */
 	public DingTalkPrincipal(String username, String password, boolean enabled, boolean accountNonExpired,
 			boolean credentialsNonExpired, boolean accountNonLocked,
 			Collection<? extends GrantedAuthority> authorities) {

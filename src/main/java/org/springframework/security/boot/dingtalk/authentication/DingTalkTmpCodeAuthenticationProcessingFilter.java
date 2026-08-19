@@ -63,11 +63,22 @@ public class DingTalkTmpCodeAuthenticationProcessingFilter extends AbstractAuthe
     private boolean postOnly = false;
     private ObjectMapper objectMapper = new ObjectMapper();
     
+    /**
+     * Constructs a new ding talk tmp code authentication processing filter instance.
+     *
+     * @param objectMapper the object mapper
+     */
     public DingTalkTmpCodeAuthenticationProcessingFilter(ObjectMapper objectMapper) {
     	super(PathPatternRequestMatcher.pathPattern("/login/dingtalk/tmpcode"));
 		this.objectMapper = objectMapper;
 	}
 
+	/**
+	 * Constructs a new ding talk tmp code authentication processing filter instance.
+	 *
+	 * @param objectMapper the object mapper
+	 * @param requestMatcher the request matcher
+	 */
 	public DingTalkTmpCodeAuthenticationProcessingFilter(ObjectMapper objectMapper, RequestMatcher requestMatcher) {
 		super(requestMatcher);
 		this.objectMapper = objectMapper;

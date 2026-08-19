@@ -46,6 +46,11 @@ public class DingTalkMatchedAuthenticationSuccessJwtHandler implements MatchedAu
 	private JwtPayloadRepository payloadRepository;
 	private boolean checkExpiry = false;
 
+	/**
+	 * Constructs a new ding talk matched authentication success jwt handler instance.
+	 *
+	 * @param payloadRepository the payload repository
+	 */
 	public DingTalkMatchedAuthenticationSuccessJwtHandler(JwtPayloadRepository payloadRepository) {
 		this.setPayloadRepository(payloadRepository);
 	}

@@ -8,6 +8,7 @@ import lombok.Data;
 /**
  * Enterprise internal application free-login、Third-party enterprise application free-login、Application management backend free-login
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -34,6 +35,10 @@ public class DingTalkTmpCodeLoginRequest {
 	 */
 	protected String accessToken;
     
+    /**
+     * Constructs a new ding talk tmp code login request instance.
+     *
+     */
 	@JsonIgnoreProperties(ignoreUnknown = true)
     @JsonCreator
     public DingTalkTmpCodeLoginRequest(@JsonProperty("corpId") String corpId,
