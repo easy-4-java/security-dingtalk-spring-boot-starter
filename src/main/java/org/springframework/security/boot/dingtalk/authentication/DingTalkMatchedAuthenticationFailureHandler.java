@@ -18,6 +18,12 @@ import java.io.IOException;
 /**
  * DingTalkImplementation of authentication failure handling
  */
+/**
+ * <p>DingTalkMatchedAuthenticationFailureHandler implementation.</p>
+ *
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class DingTalkMatchedAuthenticationFailureHandler implements MatchedAuthenticationFailureHandler {
 
 	protected MessageSourceAccessor messages = SpringSecurityBizMessageSource.getAccessor();

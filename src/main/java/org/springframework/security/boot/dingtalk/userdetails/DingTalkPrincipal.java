@@ -26,6 +26,12 @@ import java.util.Collection;
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 @SuppressWarnings("serial")
+/**
+ * <p>DingTalkPrincipal implementation.</p>
+ *
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class DingTalkPrincipal extends SecurityPrincipal {
 
 	/**

@@ -22,6 +22,12 @@ import org.springframework.util.StringUtils;
 /**
  * https://open.dingtalk.com/document/orgapp-server/scan-qr-code-to-log-on-to-third-party-websites
  */
+/**
+ * <p>DingTalkTmpCodeAuthenticationProvider implementation.</p>
+ *
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class DingTalkTmpCodeAuthenticationProvider implements AuthenticationProvider, InitializingBean {
 	
 	private UserDetailsChecker userDetailsChecker = new AccountStatusUserDetailsChecker();

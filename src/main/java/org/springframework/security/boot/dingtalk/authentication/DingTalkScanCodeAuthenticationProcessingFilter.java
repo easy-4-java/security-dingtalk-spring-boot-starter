@@ -41,6 +41,12 @@ import java.io.IOException;
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 @Slf4j
+/**
+ * <p>DingTalkScanCodeAuthenticationProcessingFilter implementation.</p>
+ *
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class DingTalkScanCodeAuthenticationProcessingFilter extends AbstractAuthenticationProcessingFilter {
 
 	protected MessageSourceAccessor messages = SpringSecurityBizMessageSource.getAccessor();

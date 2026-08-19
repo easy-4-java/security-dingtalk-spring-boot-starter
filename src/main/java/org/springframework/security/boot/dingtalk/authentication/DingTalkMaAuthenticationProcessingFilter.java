@@ -34,6 +34,12 @@ import java.io.IOException;
 /**
  * https://open.dingtalk.com/document/orgapp-client/mini-program-free-login
  */
+/**
+ * <p>DingTalkMaAuthenticationProcessingFilter implementation.</p>
+ *
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class DingTalkMaAuthenticationProcessingFilter extends PostOnlyAuthenticationProcessingFilter {
 
 	public static final String SPRING_SECURITY_FORM_CROPID_KEY = "cropId";

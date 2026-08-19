@@ -41,6 +41,12 @@ import java.io.IOException;
  *  Application management backend free-login: https://open.dingtalk.com/document/orgapp-server/log-on-site-application-management-backend
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
+/**
+ * <p>DingTalkTmpCodeAuthenticationProcessingFilter implementation.</p>
+ *
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class DingTalkTmpCodeAuthenticationProcessingFilter extends AbstractAuthenticationProcessingFilter {
 
 	protected MessageSourceAccessor messages = SpringSecurityBizMessageSource.getAccessor();

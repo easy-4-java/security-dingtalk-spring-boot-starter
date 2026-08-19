@@ -23,6 +23,12 @@ import org.springframework.security.boot.biz.exception.AuthenticationServiceExce
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 @SuppressWarnings("serial")
+/**
+ * <p>DingTalkAuthenticationServiceException implementation.</p>
+ *
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class DingTalkAuthenticationServiceException extends AuthenticationServiceExceptionAdapter {
 
 	public DingTalkAuthenticationServiceException( String msg) {
