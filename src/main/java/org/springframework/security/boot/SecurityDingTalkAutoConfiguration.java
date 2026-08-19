@@ -27,6 +27,10 @@ public class SecurityDingTalkAutoConfiguration {
 	}
 	
 	@Bean
+    /**
+     * <p>Dingtalk matched authentication failure handler.</p>
+     * @return the dingtalk matched authentication failure handler
+     */
 	public DingTalkMatchedAuthenticationFailureHandler dingtalkMatchedAuthenticationFailureHandler() {
 		return new DingTalkMatchedAuthenticationFailureHandler();
 	}

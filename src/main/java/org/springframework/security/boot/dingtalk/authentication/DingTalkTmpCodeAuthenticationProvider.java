@@ -60,6 +60,11 @@ public class DingTalkTmpCodeAuthenticationProvider implements AuthenticationProv
      * @throws AuthenticationException if authentication fails
      */
     @Override
+    /**
+     * <p>Authenticate.</p>
+     * @param authentication
+     * @return the authenticate
+     */
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         
     	Assert.notNull(authentication, "No authentication data provided");
